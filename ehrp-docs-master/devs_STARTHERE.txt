@@ -1,0 +1,77 @@
+For future devs:
+
+This is the directory for the documentation for the EHRP API. Start here if you
+are new to this part of the project and you don't know what to do, or just new
+to any type of web dev in general.
+
+1. Technology and Frameworks
+Below are some things you need to understand in order to start with this part
+of the project.
+
+- npm
+    https://nodejs.org/en/knowledge/getting-started/npm/what-is-npm/
+    - A package manager for node.js. It allows easy installation and
+      configuration of any packages that you may use in the server.
+
+- node.js
+    https://nodejs.org/en/about/
+    https://www.w3schools.com/nodejs/nodejs_intro.asp
+    - This is traditionally a server side framework. For the purposes of the
+      documentation however, it enables the use of dynamic page content.
+
+- bootstrap
+    https://en.wikipedia.org/wiki/Bootstrap_(front-end_framework)
+    - No I did not build any what you see on the web page from scratch.
+      I used Bootstrap and a lot of googling. Bootstrap is a CSS framework that
+      has a bunch of web page components. It's kinda like a LEGO toolkit for
+      web pages.
+
+- HTML, CSS, JavaScript
+    - You should know enough of this part so that you can configure minor stuff.
+      eg) Change page titles, change colors, change layouts of the text
+
+2. Notable Folders and Files
+These are the folders and files you are directly working with. If not listed here,
+that means that either:
+    a. It's not important.
+    b. It is important but you do not need to edit/configure/touch directly.
+
+- server.js: File
+    - This is one of the most important files in the directory. This is the first
+      file you will configure when adding new landing pages to the documentation.
+
+- package.json: File
+    - This is the file to configure the information of the server for the website.
+
+- node_modules: Folder
+    - This is where all of the packages used for the server is stored. You don't
+      need to directly add or edit anything in here, unless what you're trying
+      to do specifically calls for it.
+
+- public: Folder
+    - This is where the style sheets and the scripts are stored. /css holds the
+      style sheets and /javascript holds the scripts needed for the dynamic
+      movements of the documentation.
+
+- views: Folder
+    - Any .ejs files: File
+        - .ejs files are embedded JavaScript files. These are necessary for
+          modularity of the page. The "<%- include('partials/[filename]') %>"
+          are separate components store in in views/partials.
+
+    - views/partials: Folder
+        - These are the HTML partials used throughout the web site. All of the
+          files will show up on every single landing page on the site.
+
+3. Contributing to the documentation website
+
+i) Adding new landing pages
+    1. Within /views, copy template.ejs and rename it to the
+       new landing page.
+
+    2. Add content to it.
+
+    3. Go to server.js. Use the template in there and add the landing page.
+
+    4. Make sure you can navigate to it by adding a link to the
+       /views/partials/sidebar.ejs.
