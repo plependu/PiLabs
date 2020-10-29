@@ -23,7 +23,7 @@ ALL_DICTS_AND_ONTOLOGIES = None
 
 ''' Parses arguments and starts the api '''
 
-# -------------------- Get initial arguments passed in ---------------------
+# =================== Get initial arguments passed in ====================
 
 parser = argparse.ArgumentParser()
 
@@ -38,10 +38,10 @@ parser.add_argument('--port', type=int, default='8020', help="Port (default: 802
 
 args = parser.parse_args()
 
-#----------------------end argument parsing ------------------------------------
+# ====================== end argument parsing ====================================
 
 
-#----------------------- Set up unitex --------------------------------------
+# ======================= Set up unitex ======================================
 
 # Load resources
 config = None
@@ -58,10 +58,10 @@ ALL_GROUPINGS = get_json_from_file(GRAMMAR_PARSING_GROUPS_PATH)
 ALL_DICTS_AND_ONTOLOGIES = get_json_from_file(DICTS_AND_ONTOLOGIES_PATH)
 ALL_DICTS_AND_ONTOLOGIES['dictionaries'] = dict_names_to_paths(ALL_DICTS_AND_ONTOLOGIES['dictionaries'])
 
-#------------------------end Unitex setup --------------------------------------
+# ======================== end Unitex setup =====================================
 
 
-# --------------------------- Start flask app ------------------------------
+# =========================== Start flask app ==============================
 
 print("Starting app . . .")
 app = Flask(__name__)
@@ -82,14 +82,14 @@ def raise_error(error):
     '''Error message for resource not found'''
     return error
 
-# ================== Define routes to resources ================================
+# ------------------ Define routes to resources --------------------------------
 # Define endpoint for the Ehrs resource
 resource_args = (OPTIONS, ALL_GROUPINGS, ALL_DICTS_AND_ONTOLOGIES)
 api.add_resource(Ehrs, '/ehrs', resource_class_args=resource_args)
 
 # Define endpoint for the Terms resource
 api.add_resource(Terms, '/terms', resource_class_args=resource_args)
-# ================== End route and resource definitions ========================
+# ------------------ End route and resource definitions ------------------------
 
 # Start the app
 app.run(host=args.host, port=args.port)
@@ -97,4 +97,4 @@ app.run(host=args.host, port=args.port)
 # Free resources when api closes
 free_alphabets(OPTIONS)
 
-#------------------- End flask app startup -------------------------------------
+# =================== End flask app startup ====================================
