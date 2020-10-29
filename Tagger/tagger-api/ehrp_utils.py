@@ -14,10 +14,8 @@ from unitex.io import ls, rm, cp, exists, UnitexFile, mv
 from unitex.tools import UnitexConstants, normalize, tokenize, dico
 from unitex.resources import free_persistent_alphabet, load_persistent_alphabet
 
-# Constants reflecting project file layout, please update if you change where files are stored.
-RESOURCES_RELATIVE_PATH = 'resources'
-GRAMMAR_RELATIVE_PATH = os.path.join(RESOURCES_RELATIVE_PATH, 'Grammars')
-DICTIONARY_RELATIVE_PATH = os.path.join(RESOURCES_RELATIVE_PATH, 'Dictionaries')
+# User defined imports
+from file_paths import GRAMMAR_RELATIVE_PATH, DICTIONARY_RELATIVE_PATH
 
 # Constants obtained by empirical tests
 MEDIUM_CUTOFF = 730
