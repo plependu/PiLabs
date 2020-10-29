@@ -38,7 +38,7 @@ parser.add_argument('--port', type=int, default='8020', help="Port (default: 802
 
 args = parser.parse_args()
 
-# ====================== end argument parsing ====================================
+# ====================== End argument parsing ====================================
 
 
 # ======================= Set up unitex ======================================
@@ -58,7 +58,7 @@ ALL_GROUPINGS = get_json_from_file(GRAMMAR_PARSING_GROUPS_PATH)
 ALL_DICTS_AND_ONTOLOGIES = get_json_from_file(DICTS_AND_ONTOLOGIES_PATH)
 ALL_DICTS_AND_ONTOLOGIES['dictionaries'] = dict_names_to_paths(ALL_DICTS_AND_ONTOLOGIES['dictionaries'])
 
-# ======================== end Unitex setup =====================================
+# ======================== End Unitex setup =====================================
 
 
 # =========================== Start flask app ==============================
