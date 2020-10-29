@@ -1,0 +1,62 @@
+#Unigraph
+SIZE 1887 884
+FONT Times New Roman:  10
+OFONT Arial Unicode MS:B 12
+BCOLOR 16777215
+FCOLOR 0
+ACOLOR 13487565
+SCOLOR 16711680
+CCOLOR 255
+DBOXES y
+DFRAME y
+DDATE y
+DFILE y
+DDIR n
+DRIG n
+DRST n
+FITS 100
+PORIENT L
+#
+42
+"<E>" 48 99 1 20 
+"" 1702 436 0 
+"<Drug>" 383 99 2 14 24 
+"-+\/" 527 190 1 22 
+"<Drug>" 698 190 2 14 25 
+"-+\/" 895 232 1 23 
+"<Drug>" 1096 232 1 14 
+"allow for combination drugs" 620 125 0 
+"<Drug>" 379 436 1 28 
+"\(" 611 436 1 29 
+"<Drug>" 771 436 1 30 
+"\)" 991 436 1 12 
+"<E>" 1506 436 1 1 
+"tradename and ingredient together, useful also for \"drug finder\" search for new drugs or abbreviations" 408 332 0 
+"<E>/__DRUG_END__" 1246 99 1 26 
+"\(" 216 650 1 37 
+"\)" 1429 650 1 17 
+"<E>" 1506 650 1 1 
+"TODO: determine more specific contexts of parenthetical drug lists" 427 612 0 
+"DRUG eg \"acetaminophen\" or \"acetaminophen (Tylenol)\" or \"acetaminophen-hydrocodone\" or \"APAP\/kiphenhydramine\/phenylephrine\"" 22 35 0 
+"<E>" 90 174 3 15 21 27 
+"<E>/__DRUG_START__" 229 99 1 2 
+"<E>/__DRUG_START__" 558 190 1 4 
+"<E>/__DRUG_START__" 953 232 1 6 
+"<E>/__DRUG_END__" 401 190 1 3 
+"<E>/__DRUG_END__" 770 232 1 5 
+"<E>" 1506 99 1 1 
+"<E>/__DRUG_START__" 232 436 1 8 
+"<E>/__DRUG_END__" 466 436 1 9 
+"<E>/__DRUG_START__" 671 436 1 10 
+"<E>/__DRUG_END__" 868 436 1 11 
+"<Drug>" 424 650 2 36 40 
+"-+\/" 568 741 1 38 
+"<Drug>" 739 741 2 36 41 
+"-+\/" 936 783 1 39 
+"<Drug>" 1137 783 1 36 
+"<E>/__DRUG_END__" 1287 650 1 16 
+"<E>/__DRUG_START__" 270 650 1 31 
+"<E>/__DRUG_START__" 599 741 1 33 
+"<E>/__DRUG_START__" 994 783 1 35 
+"<E>/__DRUG_END__" 442 741 1 32 
+"<E>/__DRUG_END__" 811 783 1 34 
