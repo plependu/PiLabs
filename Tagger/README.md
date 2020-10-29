@@ -1,11 +1,10 @@
 # Tagger API
 This API provides a service to extract medical information from electronic health records (EHRs).<br>
 
-File listing:
+### File listing:
 + `tagger-api`: Contains the API source code
 + `UMLS_to_Unitex`: Scripts to transform UMLS data into Unitex format dictionaries
 
-## API
 ### Requirements
 + python 3
 + [python-unitex](https://github.com/patwat/python-unitex)
@@ -16,14 +15,13 @@ File listing:
 1. Follow the steps in `tagger-api/Resources/Dictionaries/README.md` to setup the dictionaries this API uses.
 2. `cd` into the `tagger-api` directory
 3. execute `python3 ./start_api.py`
+*The default API port can be configured in the `tagger-api/start_api.py` file.*
 
-### Usage
-The API provides two main endpoints: `/ehrs` and `/terms`
 ___
-#### To make requests of the API
-
-  #### Lookup
-  + `lookup` functionality is accessible through a `GET` request to the following URL<br>
+### To make requests of the API
+The API provides two main functionalities; `terms` and `ehrs`.
+  #### Terms
+  + `terms` functionality is accessible through a `GET` request to the following URL<br>
     URL : http://localhost:8020/ehrp-api/v1/terms<br>
     ##### Parameters
     + Required:<br>
@@ -47,7 +45,7 @@ ___
 ___
 
 #### Extract
-  + `extract` functionality is accessible through a `POST` request to the following URL<br>
+  + `ehrs` functionality is accessible through a `POST` request to the following URL<br>
     URL : http://localhost:8020/ehrp-api/v1/ehrs
     ##### Parameters
     + Optional:
@@ -64,11 +62,13 @@ ___
           'text': [medical_text_string1, medical_text_string2],
           'types': 'drug'
         }
-        response = requests.post('http://localhost:8021/ehrp-api/v1/ehrs', data=args)
+        response = requests.post('http://localhost:8020/ehrp-api/v1/ehrs', data=args)
         ```
         + Possible values for 'types':  
           + 'drug': Looks for drug names
           + 'disorder': Looks for disorder names
+          + 'device': Looks for device names
+          + 'procedure': Looks for procedure names
         + If 'types' is not specified, all types will be used.
         + If multiple types are desired, it is faster to not specify any, and just extract the desired information from the returned results
       + Name: 'file'
@@ -79,11 +79,10 @@ ___
         + Example using the python requests library:
         ```
         args = {
-          'types': ['drug', 'pt_summary', 'ami']
+          'types': ['drug', 'disorder']
         }
-
         text_file = open('medical_text_path', 'rb')
-        response = requests.post('http://localhost:8021/ehrp-api/v1/ehrs', data=args, files={'file': text_file))
+        response = requests.post('http://localhost:8020/ehrp-api/v1/ehrs', data=args, files={'file': text_file))
         ```
 
 Both GET and POST requests return JSON objects.
@@ -92,16 +91,4 @@ Both GET and POST requests return JSON objects.
 * 400: Malformed url; check your base url and parameter names to see if they conform to the descriptions above.
 * 422: Two possible reasons:
   1. 'types' parameter has unknown value; check the value(s) you are using for 'types', make sure it is one of the allowable types listed above.
-  2. In a POST request to the `extract` functionality, either both 'text' and 'file' have been specified, or neither have been specified.
-
-
-
-
-___
-## Example Interface
-1. install nodejs
-2. `cd` into the ehrp-ui-master directory
-3. execute `npm install`
-4. execute `npm start` to start the local server
-5. Visit URL at http://localhost:3020/<br>
-Port numbers and REST api can be configured in bin/settings.js file
+  2. In a POST request to the `ehrs` functionality, either both 'text' and 'file' have been specified, or neither have been specified.
