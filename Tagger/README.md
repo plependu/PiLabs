@@ -2,8 +2,8 @@
 This API provides a service to extract medical information from electronic health records (EHRs).<br>
 
 ### File listing:
-+ `tagger-api`: Contains the API source code
 + `UMLS_to_Unitex`: Scripts to transform UMLS data into Unitex format dictionaries
++ `tagger-api`: Contains the API source code
 
 ### Requirements
 + python 3
@@ -14,7 +14,8 @@ This API provides a service to extract medical information from electronic healt
 ### To start the API
 1. Follow the steps in `tagger-api/Resources/Dictionaries/README.md` to setup the dictionaries this API uses.
 2. `cd` into the `tagger-api` directory
-3. execute `python3 ./start_api.py`
+3. execute `python ./start_api.py`
+
 *The default API port can be configured in the `tagger-api/start_api.py` file.*
 
 ___
@@ -30,13 +31,13 @@ The API provides two main functionalities; `terms` and `ehrs`.
         + Description: This should be the term you want to lookup.<br>
 
     ##### Example request:
-    + GET: http://localhost:8020/ehrp-api/v1/terms?term=hypertension
+    + GET: http://localhost:8020/ehrp-api/v1/terms?term=headache
     + RESPONSE:<br>
     ```
     [
         {
           'instances': [
-            {'onto': 'Meddra', 'term': 'hypertension', 'umid': '10020772'}
+            {'cui': '10020772', 'onto': 'ICD10', 'term': 'headache'}
           ],
           'name': 'lookup'
         }
