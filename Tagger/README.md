@@ -32,7 +32,7 @@ The API provides two main functionalities; `terms` and `ehrs`.
 
     ##### Example request:
     + GET: http://localhost:8020/ehrp-api/v1/terms?term=headache
-    + RESPONSE:<br>
+    + Response:<br>
     ```
     [
         {
