@@ -83,8 +83,9 @@ def raise_error(error):
     return error
 
 # ------------------ Define routes to resources --------------------------------
-# Define endpoint for the Ehrs resource
 resource_args = (OPTIONS, ALL_GROUPINGS, ALL_DICTS_AND_ONTOLOGIES)
+
+# Define endpoint for the Ehrs resource
 api.add_resource(Ehrs, '/ehrs', resource_class_args=resource_args)
 
 # Define endpoint for the Terms resource
