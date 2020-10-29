@@ -31,7 +31,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--conf', type=str, default=os.path.join(RESOURCES_RELATIVE_PATH, 'unitex-med.yaml'),
                     help="Path to yaml file")
 
-# Define API settings
+# Define default API settings
 parser.add_argument('--host', type=str, default='localhost',
                     help="Host name (default: localhost)")
 parser.add_argument('--port', type=int, default='8020', help="Port (default: 8020)")
