@@ -45,6 +45,49 @@ app.get('/resources/texts', function (req, res) {
 app.get('/examples', function (req, res) {
     res.render('examples')
 })
+
+// Tagger documentation routes
+app.get('/tagger', function (req, res) {
+    res.render('tagger/userDocumentation')
+})
+
+app.get('/tagger/userDocumentation', function (req, res) {
+    res.render('tagger/userDocumentation')
+})
+
+app.get('/tagger/contributorDocumentation/introduction', function (req, res) {
+    res.render('tagger/contributorIntroduction')
+})
+
+app.get('/tagger/contributorDocumentation/ConceptParser', function (req, res) {
+    res.render('tagger/ConceptParser')
+})
+
+app.get('/tagger/contributorDocumentation/DictionaryParser', function (req, res) {
+    res.render('tagger/DictionaryParser')
+})
+
+app.get('/tagger/contributorDocumentation/ehrpUtils', function (req, res) {
+    res.render('tagger/ehrpUtils')
+})
+
+app.get('/tagger/contributorDocumentation/endpointResources', function (req, res) {
+    res.render('tagger/endpointResources')
+})
+
+app.get('/tagger/contributorDocumentation/filePaths', function (req, res) {
+    res.render('tagger/filePaths')
+})
+
+app.get('/tagger/contributorDocumentation/startAPI', function (req, res) {
+    res.render('tagger/startAPI')
+})
+
+app.get('/tagger/contributorDocumentation/WordSenseDisambiguation', function (req, res) {
+    res.render('tagger/WordSenseDisambiguation')
+})
+// End tagger documentation routes
+
 // Landing pages END
 
 // Error catches START

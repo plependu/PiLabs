@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <!-- Include <head> -->
+    <%- include('../partials/head') %>
+    <body>
+        <!-- Page Wrapper Start -->
+        <div class="page-wrapper chiller-theme toggled">
+
+            <!-- Include Sidebar -->
+            <%- include('../partials/sidebar') %>
+
+            <!-- Main Page Content Start -->
+            <main class="page-content">
+                <!-- Content Container Start -->
+                <div class="container">
+                    <!-- Title of Page -->
+                    <h2> Contributor documentation introduction</h2>
+                    <hr>
+
+                    This set of documents is aimed towards contributors of the Tagger API. The documents act as a description of each part of the API’s inner-workings, and provides an overview of how the individual parts interact with each other.
+
+                    This documentation is broken into individual pages. Each page is dedicated to one file in the Tagger API project. We have broken the documentation of each  file into the following sections:
+                    A diagram depicting imports and main use-case, where applicable
+                    Main idea of the file; What the overall theme of this file is
+                    Where this file and its functionalities fit into the workflow of the entire Tagger API project.
+                    Summaries of notable pieces of code within the file.
+                    Introduction
+                    The Tagger API (TagAPI) provides a Flask-based web API to perform named-entity-extraction on input free-form text. To do this, TagAPI makes use of two separate technologies: the UMLS  knowledge base, and Unitex.
+                    UMLS
+                    The Unified Medical Language System (UMLS) provides TagAPI all of its medical knowledge. We use UMLS as the basis for the creation of dictionaries. These dictionaries hold the medical words that TagAPI can then find and pull out from input text.
+                    Unitex
+                    Unitex is a natural-language-processing toolkit. It provides a host of functions for the manipulation and processing of free-form text, which is exactly what we need! Unitex is written in C++. To get around this, we use the python-unitex library. This allows us to call Unitex functions with simple python.
+
+                    Much of TagAPI is simply the manipulation of input text, processing the text with Unitex functions, and then returning nicely formatted results.
+
+                    <img src="/images/tagger/TagAPI_architecture.png" alt="TagAPI architecture diagram">
+                    
+                    <!-- Include Footer -->
+                    <%- include('../partials/footer') %>
+
+                </div>
+                <!-- Content Container End -->
+
+            </main>
+            <!-- Main Page Content End -->
+
+
+        </div>
+        <!-- Page Wrapper End -->
+
+        <!-- Include Scripts -->
+        <%- include('../partials/scripts') %>
+
+    </body>
+</html>

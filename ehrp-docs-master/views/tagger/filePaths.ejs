@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <!-- Include <head> -->
+    <%- include('../partials/head') %>
+    <body>
+        <!-- Page Wrapper Start -->
+        <div class="page-wrapper chiller-theme toggled">
+
+            <!-- Include Sidebar -->
+            <%- include('../partials/sidebar') %>
+
+            <!-- Main Page Content Start -->
+            <main class="page-content">
+                <!-- Content Container Start -->
+                <div class="container">
+                    <!-- Title of Page -->
+                    <h2> file_paths </h2>
+                    <hr>
+
+                    <img src="/images/tagger/file_paths.py.png" alt="file_paths diagram">
+                    
+                    Main Idea
+                    `file_paths.py` holds the relative file paths of certain files and folders within the `tagger-api/resources` directory. These file paths are used throughout TagAPI. If the file structure of `tagger-api/resources’ is changed, these file paths must be updated to point to the new, correct locations.
+
+                    <!-- Include Footer -->
+                    <%- include('../partials/footer') %>
+
+                </div>
+                <!-- Content Container End -->
+
+            </main>
+            <!-- Main Page Content End -->
+
+
+        </div>
+        <!-- Page Wrapper End -->
+
+        <!-- Include Scripts -->
+        <%- include('../partials/scripts') %>
+
+    </body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "dictionaries": [
+    "device.bin",
+    "disorder.bin",
+    "drug.bin",
+    "procedure.bin"
+  ]
+}

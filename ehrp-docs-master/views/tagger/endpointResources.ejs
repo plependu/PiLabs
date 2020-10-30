@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <!-- Include <head> -->
+    <%- include('../partials/head') %>
+    <body>
+        <!-- Page Wrapper Start -->
+        <div class="page-wrapper chiller-theme toggled">
+
+            <!-- Include Sidebar -->
+            <%- include('../partials/sidebar') %>
+
+            <!-- Main Page Content Start -->
+            <main class="page-content">
+                <!-- Content Container Start -->
+                <div class="container">
+                    <!-- Title of Page -->
+                    <h2> endpoint_resources.py </h2>
+                    <hr>
+
+                    <img src="/images/tagger/endpoint_resources.py.png" alt="endpoint_resources diagram">
+
+                    Main Idea
+                    `endpoint_resources.py` defines the available resources in the Flask app. Each resource is reached after a user makes a request along a route, as defined in `start_api.py`. The resource is responsible for validating expected request arguments, if any. The resource then calls the appropriate functionality within TagAPI, and returns the appropriate response to the user.
+
+                    There are currently two defined resources.
+                    Ehrs
+                    The Ehrs resource handles the extraction of medical terms from user-supplied pieces of text.
+                    Expected request arguments are specified in the User guide.
+                    Returns a JSON-format object of all the extracted medical terms.
+                    Terms
+                    The Terms resource handles the lookup of medical terms.
+                    Expected request arguments are specified in the User guide.
+                    Returns a JSON-format object of all the extracted medical terms.
+                    Code highlights
+                    class Ehrs(Resource)
+
+                    Ehrs.post
+                    Called when user makes a POST request to a route that leads to the Ehrs resource
+                    Ensures the user has exactly one of ‘file’ or ‘text’ passed as arguments
+                    Returns the extracted concepts from `extract_concepts`
+
+                    class Terms(Resource)
+
+                    Terms.get
+                    Called when a user makes a GET request to a route that leads to the Terms resource
+                    Returns the found or not found medical term from `extract_concepts`, specifying the `lookup` graph.
+
+                    <!-- Include Footer -->
+                    <%- include('../partials/footer') %>
+
+                </div>
+                <!-- Content Container End -->
+
+            </main>
+            <!-- Main Page Content End -->
+
+
+        </div>
+        <!-- Page Wrapper End -->
+
+        <!-- Include Scripts -->
+        <%- include('../partials/scripts') %>
+
+    </body>
+</html>

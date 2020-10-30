@@ -1,0 +1,26 @@
+[
+  {
+    "grammar": "master.fst2",
+    "parsing_function": "masterParser"
+  },
+  {
+    "grammar": "lookup.fst2",
+    "parsing_function": "lookupParser"
+  },
+  {
+    "grammar": "drug.fst2",
+    "parsing_function": "drugParser"
+  },
+  {
+    "grammar": "disorder.fst2",
+    "parsing_function": "disorderParser"
+  },
+  {
+    "grammar": "device.fst2",
+    "parsing_function": "deviceParser"
+  },
+  {
+    "grammar": "procedure.fst2",
+    "parsing_function": "procedureParser"
+  }
+]
