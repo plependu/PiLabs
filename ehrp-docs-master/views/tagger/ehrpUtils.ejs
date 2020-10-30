@@ -14,11 +14,36 @@
                 <!-- Content Container Start -->
                 <div class="container">
                     <!-- Title of Page -->
-                    <h2> Tagger user documentation </h2>
+                    <h2> ehrp_utils.py </h2>
                     <hr>
 
                     <img src="/images/tagger/ehrp_utils_imports.png" alt="ehrp_utils diagram">
                     <img src="/images/tagger/ehrp_utils_uses.png" alt="ehrp_utils diagram">
+                    
+                    Main Idea
+                    `ehrp_utils.py` is exactly what it sounds like, a file for holding utility functions. As such, it is imported into many different files within TagAPI. Many of its functions are heterogenous, and don’t have a consistent theme. We are weary of this file becoming bloated though. It may be best to begin breaking out certain groups of functions into separate files, as you see fit.
+                    Code Highlights
+                    extract_concepts
+                    This is where TagAPI really begins to start processing text.
+                    It first grabs all the grammars specified by the user (defaults to all).
+                    It then decides if the user request is large or small
+                    A small user request gets handled by `medium_processing`
+                    A large user request gets handled by `batch_processing` (Yes, the names need updating)
+                    medium_processing
+                    This function initially groups all the user-provided pieces of text for pre-processing with Unitex
+                    Afterwards, the concepts are extracted separately from each piece of text
+                    The concepts are captured together in a list, and returned
+                    batch_processing
+                    This function groups all the user-provided pieces of text for pre-processing with Unitex
+                    It then extracts the concepts from the still-grouped text, all at once
+                    It specifies that it is a ‘LARGE_BATCH’ to `get_concepts_for_grammars`
+                    get_concepts_for_grammars
+                    Called by either `medium_processing` or `batch_processing`
+                    Sets up a `ConceptParser` instance
+                    Uses each specified grammar to extract concepts from the user-provided text
+                    Called once per user-provided text in `medium_processing` (potentially many times)
+                    Called only once in `batch_processing`
+
                     <!-- Include Footer -->
                     <%- include('../partials/footer') %>
 

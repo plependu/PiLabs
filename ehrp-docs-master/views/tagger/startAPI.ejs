@@ -14,10 +14,24 @@
                 <!-- Content Container Start -->
                 <div class="container">
                     <!-- Title of Page -->
-                    <h2> Tagger user documentation </h2>
+                    <h2> start_api.py </h2>
                     <hr>
 
                     <img src="/images/tagger/start_api.py.png" alt="start_api diagram">
+
+                    Main Idea
+                    `start_api.py` is the entry point for TagAPI. Running this script will bring up the API and allow users to begin making requests of it.
+
+                    `start_api.py` defines TagAPI’s routes to TagAPI’s resources. A route is the path the user follows when making a request to TagAPI. A resource is what lies at the end of that path.
+
+                    `start_api.py` creates two routes:
+                    `/ehrs`: This exposes the Ehrs resource
+                    If a user makes a request to ‘.../ehrs’, then the Ehrs resource takes over.
+                    `/terms`: This exposes the Terms resource
+                    If a user makes a request to ‘.../terms’, then the Terms resource takes over.
+
+                    If more routes are desired, simply add them here, and add the desired resource to `endpoint_resources.py`
+
                     <!-- Include Footer -->
                     <%- include('../partials/footer') %>
 

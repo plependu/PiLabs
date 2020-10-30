@@ -14,10 +14,17 @@
                 <!-- Content Container Start -->
                 <div class="container">
                     <!-- Title of Page -->
-                    <h2> Tagger user documentation </h2>
+                    <h2> WordSenseDisambiguation.py </h2>
                     <hr>
 
                     <img src="/images/tagger/WordSenseDisambiguation.py.png" alt="WordSenseDisambiguation diagram">
+
+                    Main Idea
+                    UMLS contains a fair amount of homonyms. This means that we need some way to decide when one CUI is more appropriate than another. This amounts to the technique of Word Sense Disambiguation. This is a well studied technique in Natural Language Processing. However, it does need to be tuned to individual use-cases. TagAPI does not currently implement word sense disambiguation. This is merely placeholder code so that when we do implement word sense disambiguation, we have a ready place to put it.
+                    Code Highlights
+                    WordSenseDisambiguation.get_meaning
+                    Simply returns the first CUI in the given list of candidate CUIs
+
                     <!-- Include Footer -->
                     <%- include('../partials/footer') %>
 

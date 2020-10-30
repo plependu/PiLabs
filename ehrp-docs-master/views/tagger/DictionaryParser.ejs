@@ -14,10 +14,29 @@
                 <!-- Content Container Start -->
                 <div class="container">
                     <!-- Title of Page -->
-                    <h2> Tagger user documentation </h2>
+                    <h2> DictionaryParser.py </h2>
                     <hr>
 
                     <img src="/images/tagger/DictionaryParser.py.png" alt="DictionaryParser diagram">
+                    
+                    Main Idea
+                    `DictionaryParser.py` holds the `DictionaryParser` class. The `DictionaryParser` is responsible for creating a lookup table for medical concepts. This lookup table allows the medical concepts extracted from user-provided text to be mapped to UMLS CUIs and ontologies.
+
+                    The used ConceptParser parsing method will repeatedly access this lookup table to build the dictionary of extracted medical concepts with their associated UMLS CUIs and ontologies.
+                    Code highlights
+                    DictionaryParser.parse_entities
+                    Called on DictionaryParser initialization
+                    Given a list of every medical concept found in the user-provided text
+                    This list contains the Unitex Dictionary entries of each found medical concept
+                    Each Unitex Dictionary entry contains the UMLS CUI and ontology of that medical concept
+                    DictionaryParser.parse_entites parses each Unitex Dictionary entry, and creates a lookup table that associates medical concepts with UMLS CUIs and ontologies
+                    DictionaryParser.get_entry
+                    The in-use ConceptParser parsing method will call `DictionaryParser.get_entry` once for each medical concept found
+                    `DictionaryParser.get_entry` does a lookup in DictionaryParser.terms
+                    This may result in a homonym
+                    In this case, `DictionaryParser.get_entry` then calls WordSenseDisambiguation.get_meaning to choose the correct UMLS CUI
+                    DictionaryParser.get_entry then returns the associated CUI and ontology of the given medical concept
+
                     <!-- Include Footer -->
                     <%- include('../partials/footer') %>
 
