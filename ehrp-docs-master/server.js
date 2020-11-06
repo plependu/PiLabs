@@ -48,43 +48,19 @@ app.get('/examples', function (req, res) {
 
 // Tagger documentation routes
 app.get('/tagger', function (req, res) {
-    res.render('tagger/userDocumentation')
+    res.render('tagger/userGuide')
 })
 
-app.get('/tagger/userDocumentation', function (req, res) {
-    res.render('tagger/userDocumentation')
+app.get('/tagger/userGuide', function (req, res) {
+    res.render('tagger/userGuide')
 })
 
-app.get('/tagger/contributorDocumentation/introduction', function (req, res) {
-    res.render('tagger/contributorIntroduction')
+app.get('/tagger/contributionGuide', function (req, res) {
+    res.render('tagger/contributionGuide')
 })
 
-app.get('/tagger/contributorDocumentation/ConceptParser', function (req, res) {
-    res.render('tagger/ConceptParser')
-})
-
-app.get('/tagger/contributorDocumentation/DictionaryParser', function (req, res) {
-    res.render('tagger/DictionaryParser')
-})
-
-app.get('/tagger/contributorDocumentation/ehrpUtils', function (req, res) {
-    res.render('tagger/ehrpUtils')
-})
-
-app.get('/tagger/contributorDocumentation/endpointResources', function (req, res) {
-    res.render('tagger/endpointResources')
-})
-
-app.get('/tagger/contributorDocumentation/filePaths', function (req, res) {
-    res.render('tagger/filePaths')
-})
-
-app.get('/tagger/contributorDocumentation/startAPI', function (req, res) {
-    res.render('tagger/startAPI')
-})
-
-app.get('/tagger/contributorDocumentation/WordSenseDisambiguation', function (req, res) {
-    res.render('tagger/WordSenseDisambiguation')
+app.get('/tagger/contributionGuide/structure', function (req, res) {
+    res.render('tagger/structure')
 })
 // End tagger documentation routes
 

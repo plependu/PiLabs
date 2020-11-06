@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <!-- Include <head> -->
+    <%- include('../partials/head') %>
+    <body>
+        <!-- Page Wrapper Start -->
+        <div class="page-wrapper chiller-theme toggled">
+
+            <!-- Include Sidebar -->
+            <%- include('../partials/sidebar') %>
+
+            <!-- Main Page Content Start -->
+            <main class="page-content">
+                <!-- startAPI.py Start -->
+                <div class="container" id="startAPI">
+                    <!-- Title of Page -->
+                    <h2> start_api.py </h2>
+                    <hr>
+
+                    <img src="/images/tagger/start_api.py.png" alt="start_api diagram">
+
+                    Main Idea
+                    <p>
+                      `start_api.py` is the entry point for TagAPI. Running this script will bring up the API and allow users to begin making requests of it.
+                    </p>
+
+                    <p>
+                      `start_api.py` defines TagAPI’s routes to TagAPI’s resources. A route is the path the user follows when making a request to TagAPI. A resource is what lies at the end of that path.
+                    </p>
+
+                    <p>
+                      `start_api.py` creates two routes:<br>
+                      `/ehrs`: This exposes the Ehrs resource<br>
+                      If a user makes a request to ‘.../ehrs’, then the Ehrs resource takes over.<br>
+                      `/terms`: This exposes the Terms resource<br>
+                      If a user makes a request to ‘.../terms’, then the Terms resource takes over.<br>
+                    </p>
+
+                    <p>
+                      If more routes are desired, simply add them here, and add the desired resource to `endpoint_resources.py`.
+                    </p>
+                </div>
+                <!-- startAPI.py End -->
+
+                <!-- ConceptParser.py Start -->
+                <div class="container" id="conceptParser">
+                    <!-- Title of Page -->
+                    <h2> ConceptParser.py </h2>
+                    <hr>
+
+                    <img src="/images/tagger/ConceptParser.py.png" alt="ConceptParser diagram">
+                      <p>
+                        Main Idea
+                        `ConceptParser.py` holds quite a bit of TagAPI’s core functionality. Additionally, it interacts quite a bit with several Unitex files. We highly recommend you become familiar with the format of those files: ‘concord.txt’, ‘concord.ind’, ‘tokens.txt’, ‘text.cod’.
+                      </p>
+
+                      <p>
+                    In `ConceptParser.py`, TagAPI finally makes the Unitex function calls that pull out medical terms from user-provided text. TagAPI does this through the application of developer-created Unitex graphs to the text. Unitex graphs are essentially epsilon nondeterministic finite automata. They search out specific patterns and words in text, and construct a concordance.
+                      </p>
+
+                      <p>
+                    A concordance is just a file that stores each location in the user-provided text that matches the pattern specified in a graph. This is how TagAPI grabs words out of user-provided text.
+                      </p>
+
+                      <p>
+                    Every time an instance of ConceptParser is created, it is given three main pieces of information: user-provided text, a path to a Unitex graph file, and the name of a ConceptParser parsing method.
+                      </p>
+
+                      <p>
+                    ConceptParser applies the graph to the user-provided text to get a concordance of medical terms. It then gives this concordance to the specified ConceptParser parsing method. This parsing method then maps each found term to the correct UMLS CUI, formats all the terms into a python dictionary, and returns the dictionary of neatly formatted medical concepts.
+                    Code highlights
+                      </p>
+
+
+                    ConceptParser.parse
+                      <p>
+                    Called from the `get_concepts_for_grammars` function in `ehrp_utils.py`.<br>
+                    ConceptParser.batch_type specifies whether `medium_processing` or `batch_processing` was called in `ehrp_utils.py`<br>
+                    If `medium_processing`, ConceptParser.parse simply calls the specified ConceptParser parsing method as described above in the Main Idea section.<br>
+                    If ‘batch_processing’, ConceptParser.parse must first preprocess the produced concordance before passing it to the specified ConceptParser parsing method. This is because `batch_processing` has called ConceptParser.parse on all the combined user-provided text together. After applying the Unitex graph to this combined text, ConceptParser must separate each individual user-provided text’s found medical concepts. This allows ConceptParser to group the found medical concepts according to the user-provided text each medical concept was extracted from.
+                      </p>
+                    ConceptParser.masterParser
+                      <p>
+                    ConceptParser.masterParser is responsible for handling the case when the user does not specify any particular set of graphs. When this occurs, all types of medical concepts are searched for, and so we apply the `master.fst2` Unitex graph to the user-provided text. `master.fst2` combines all four of our graphs into one. It makes use of `device.fst2`, `drug.fst2`, `disorder.fst2`, and `procedure.fst2`. This means we will need to be able to parse each of the these four types of findings all within ConceptParser.masterParser. To do this, we first separate the given instances of found medical concepts by category (device, drug, disorder, procedure). Then each ConceptParser parsing method is called on the appropriate category. ConceptParser.masterParser combines these four individual dictionaries into a list, and returns this list to ConcepParser.parse.
+                      </p>
+                </div>
+                <!-- ConceptParser.py End -->
+
+                <!-- file_paths.py Start -->
+                <div class="container" id="filePaths">
+                    <!-- Title of Page -->
+                    <h2> file_paths.py </h2>
+                    <hr>
+
+                    <img src="/images/tagger/file_paths.py.png" alt="file_paths diagram">
+
+                    Main Idea
+                    <p>
+                    `file_paths.py` holds the relative file paths of certain files and folders within the `tagger-api/resources` directory. These file paths are used throughout TagAPI. If the file structure of `tagger-api/resources’ is changed, these file paths must be updated to point to the new, correct locations.
+                    </p>
+                </div>
+                <!-- file_paths.py End -->
+
+                <!-- endpoint_resources.py Start -->
+                  <div class="container">
+                    <!-- Title of Page -->
+                    <h2> endpoint_resources.py </h2>
+                    <hr>
+
+                    <img src="/images/tagger/endpoint_resources.py.png" alt="endpoint_resources diagram">
+
+                    Main Idea
+                    <p>
+                    `endpoint_resources.py` defines the available resources in the Flask app. Each resource is reached after a user makes a request along a route, as defined in `start_api.py`. The resource is responsible for validating expected request arguments, if any. The resource then calls the appropriate functionality within TagAPI, and returns the appropriate response to the user.
+                    </p>
+
+                    <p>
+                    There are currently two defined resources.
+                    </p>
+                    Ehrs
+                    <p>
+                    The Ehrs resource handles the extraction of medical terms from user-supplied pieces of text.<br>
+                    Expected request arguments are specified in the User guide.<br>
+                    Returns a JSON-format object of all the extracted medical terms.<br>
+                    </p>
+
+                    Terms
+                    <p>
+                    The Terms resource handles the lookup of medical terms.<br>
+                    Expected request arguments are specified in the User guide.<br>
+                    Returns a JSON-format object of all the extracted medical terms.<br>
+                    </p>
+
+                    Code highlights
+                    <p>
+                    class Ehrs(Resource)
+
+                    Ehrs.post<br>
+                    Called when user makes a POST request to a route that leads to the Ehrs resource.<br>
+                    Ensures the user has exactly one of ‘file’ or ‘text’ passed as arguments.<br>
+                    Returns the extracted concepts from `extract_concepts`.<br>
+                    </p>
+
+                    <p>
+                    class Terms(Resource)
+
+                    Terms.get<br>
+                    Called when a user makes a GET request to a route that leads to the Terms resource.<br>
+                    Returns the found or not found medical term from `extract_concepts`, specifying the `lookup` graph.<br>
+                    </p>
+                </div>
+                <!-- endpoint_resources.py End -->
+
+                <!-- ehrp_utils.py Start -->
+                <div class="container" id="ehrpUtils">
+                    <!-- Title of Page -->
+                    <h2> ehrp_utils.py </h2>
+                    <hr>
+
+                    Imports
+                    <img src="/images/tagger/ehrp_utils_imports.png" alt="ehrp_utils imports diagram">
+
+                    Primary use case
+                    <img src="/images/tagger/ehrp_utils_uses.png" alt="ehrp_utils uses diagram">
+
+                    Main Idea
+                    <p>
+                      `ehrp_utils.py` is exactly what it sounds like, a file for holding utility functions. As such, it is imported into many different files within TagAPI. Many of its functions are heterogenous, and don’t have a consistent theme. We are weary of this file becoming bloated though. It may be best to begin breaking out certain groups of functions into separate files, as you see fit.
+                    </p>
+
+                    Code Highlights<br>
+                    extract_concepts
+                    <p>
+                      This is where TagAPI really begins to start processing text.<br>
+                      It first grabs all the grammars specified by the user (defaults to all).<br>
+                      It then decides if the user request is large or small<br>
+                      A small user request gets handled by `medium_processing`<br>
+                      A large user request gets handled by `batch_processing` (Yes, the names need updating)<br>
+                    </p>
+
+                    medium_processing
+                    <p>
+                      This function initially groups all the user-provided pieces of text for pre-processing with Unitex<br>
+                      Afterwards, the concepts are extracted separately from each piece of text<br>
+                      The concepts are captured together in a list, and returned<br>
+                    </p>
+
+                    batch_processing
+                    <p>
+                      This function groups all the user-provided pieces of text for pre-processing with Unitex<br>
+                      It then extracts the concepts from the still-grouped text, all at once<br>
+                      It specifies that it is a ‘LARGE_BATCH’ to `get_concepts_for_grammars`<br>
+                    </p>
+
+                    get_concepts_for_grammars
+                    <p>
+                      Called by either `medium_processing` or `batch_processing`<br>
+                      Sets up a `ConceptParser` instance<br>
+                      Uses each specified grammar to extract concepts from the user-provided text<br>
+                      Called once per user-provided text in `medium_processing` (potentially many times)<br>
+                      Called only once in `batch_processing`<br>
+                    </p>
+                </div>
+                <!-- ehrp_utils.py End -->
+
+                <!-- DictionaryParser.py End -->
+                <div class="container" id="dictionaryParser">
+                    <!-- Title of Page -->
+                    <h2> DictionaryParser.py </h2>
+                    <hr>
+
+                    <img src="/images/tagger/DictionaryParser.py.png" alt="DictionaryParser diagram">
+
+                    Main Idea
+                    <p>
+                      `DictionaryParser.py` holds the `DictionaryParser` class. The `DictionaryParser` is responsible for creating a lookup table for medical concepts. This lookup table allows the medical concepts extracted from user-provided text to be mapped to UMLS CUIs and ontologies.
+                    </p>
+
+                    <p>
+                      The used ConceptParser parsing method will repeatedly access this lookup table to build the dictionary of extracted medical concepts with their associated UMLS CUIs and ontologies.
+                    </p>
+
+                    Code highlights<br>
+
+                    DictionaryParser.parse_entities
+                    <p>
+                      Called on DictionaryParser initialization<br>
+                      Given a list of every medical concept found in the user-provided text<br>
+                      This list contains the Unitex Dictionary entries of each found medical concept<br>
+                      Each Unitex Dictionary entry contains the UMLS CUI and ontology of that medical concept<br>
+                      DictionaryParser.parse_entites parses each Unitex Dictionary entry, and creates a lookup table that associates medical concepts with UMLS CUIs and ontologies<br>
+                    </p>
+
+                    DictionaryParser.get_entry
+                    <p>
+                      The in-use ConceptParser parsing method will call `DictionaryParser.get_entry` once for each medical concept found<br>
+                      `DictionaryParser.get_entry` does a lookup in DictionaryParser.terms<br>
+                      This may result in a homonym<br>
+                      In this case, `DictionaryParser.get_entry` then calls WordSenseDisambiguation.get_meaning to choose the correct UMLS CUI<br>
+                      DictionaryParser.get_entry then returns the associated CUI and ontology of the given medical concept<br>
+                    </p>
+                </div>
+                <!-- DictionaryParser.py End -->
+
+                <!-- WordSenseDisambiguation.py Start -->
+                <div class="container" id="wordSenseDisambiguation">
+                    <!-- Title of Page -->
+                    <h2> WordSenseDisambiguation.py </h2>
+                    <hr>
+
+                    <img src="/images/tagger/WordSenseDisambiguation.py.png" alt="WordSenseDisambiguation diagram">
+
+                    Main Idea
+                    <p>
+                    UMLS contains a fair amount of homonyms. This means that we need some way to decide when one CUI is more appropriate than another. This amounts to the technique of Word Sense Disambiguation. This is a well studied technique in Natural Language Processing. However, it does need to be tuned to individual use-cases. TagAPI does not currently implement word sense disambiguation. This is merely placeholder code so that when we do implement word sense disambiguation, we have a ready place to put it.
+                    </p>
+
+                    Code Highlights<br>
+
+                    WordSenseDisambiguation.get_meaning
+                    <p>
+                      Simply returns the first CUI in the given list of candidate CUIs
+                    </p>
+                </div>
+                <!-- WordSenseDisambiguation.py End -->
+
+              <!-- Include Footer -->
+              <%- include('../partials/footer') %>
+            </main>
+            <!-- Main Page Content End -->
+
+
+        </div>
+        <!-- Page Wrapper End -->
+
+        <!-- Include Scripts -->
+        <%- include('../partials/scripts') %>
+
+    </body>
+</html>
