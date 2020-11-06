@@ -42,50 +42,6 @@
                 </div>
                 <!-- startAPI.py End -->
 
-                <!-- ConceptParser.py Start -->
-                <div class="container" id="conceptParser">
-                    <!-- Title of Page -->
-                    <h2> ConceptParser.py </h2>
-                    <hr>
-
-                    <img src="/images/tagger/ConceptParser.py.png" alt="ConceptParser diagram">
-                      <p>
-                        Main Idea
-                        `ConceptParser.py` holds quite a bit of TagAPI’s core functionality. Additionally, it interacts quite a bit with several Unitex files. We highly recommend you become familiar with the format of those files: ‘concord.txt’, ‘concord.ind’, ‘tokens.txt’, ‘text.cod’.
-                      </p>
-
-                      <p>
-                    In `ConceptParser.py`, TagAPI finally makes the Unitex function calls that pull out medical terms from user-provided text. TagAPI does this through the application of developer-created Unitex graphs to the text. Unitex graphs are essentially epsilon nondeterministic finite automata. They search out specific patterns and words in text, and construct a concordance.
-                      </p>
-
-                      <p>
-                    A concordance is just a file that stores each location in the user-provided text that matches the pattern specified in a graph. This is how TagAPI grabs words out of user-provided text.
-                      </p>
-
-                      <p>
-                    Every time an instance of ConceptParser is created, it is given three main pieces of information: user-provided text, a path to a Unitex graph file, and the name of a ConceptParser parsing method.
-                      </p>
-
-                      <p>
-                    ConceptParser applies the graph to the user-provided text to get a concordance of medical terms. It then gives this concordance to the specified ConceptParser parsing method. This parsing method then maps each found term to the correct UMLS CUI, formats all the terms into a python dictionary, and returns the dictionary of neatly formatted medical concepts.
-                    Code highlights
-                      </p>
-
-
-                    ConceptParser.parse
-                      <p>
-                    Called from the `get_concepts_for_grammars` function in `ehrp_utils.py`.<br>
-                    ConceptParser.batch_type specifies whether `medium_processing` or `batch_processing` was called in `ehrp_utils.py`<br>
-                    If `medium_processing`, ConceptParser.parse simply calls the specified ConceptParser parsing method as described above in the Main Idea section.<br>
-                    If ‘batch_processing’, ConceptParser.parse must first preprocess the produced concordance before passing it to the specified ConceptParser parsing method. This is because `batch_processing` has called ConceptParser.parse on all the combined user-provided text together. After applying the Unitex graph to this combined text, ConceptParser must separate each individual user-provided text’s found medical concepts. This allows ConceptParser to group the found medical concepts according to the user-provided text each medical concept was extracted from.
-                      </p>
-                    ConceptParser.masterParser
-                      <p>
-                    ConceptParser.masterParser is responsible for handling the case when the user does not specify any particular set of graphs. When this occurs, all types of medical concepts are searched for, and so we apply the `master.fst2` Unitex graph to the user-provided text. `master.fst2` combines all four of our graphs into one. It makes use of `device.fst2`, `drug.fst2`, `disorder.fst2`, and `procedure.fst2`. This means we will need to be able to parse each of the these four types of findings all within ConceptParser.masterParser. To do this, we first separate the given instances of found medical concepts by category (device, drug, disorder, procedure). Then each ConceptParser parsing method is called on the appropriate category. ConceptParser.masterParser combines these four individual dictionaries into a list, and returns this list to ConcepParser.parse.
-                      </p>
-                </div>
-                <!-- ConceptParser.py End -->
-
                 <!-- file_paths.py Start -->
                 <div class="container" id="filePaths">
                     <!-- Title of Page -->
@@ -203,7 +159,51 @@
                 </div>
                 <!-- ehrp_utils.py End -->
 
-                <!-- DictionaryParser.py End -->
+                <!-- ConceptParser.py Start -->
+                <div class="container" id="conceptParser">
+                    <!-- Title of Page -->
+                    <h2> ConceptParser.py </h2>
+                    <hr>
+
+                    <img src="/images/tagger/ConceptParser.py.png" alt="ConceptParser diagram">
+                      <p>
+                        Main Idea
+                        `ConceptParser.py` holds quite a bit of TagAPI’s core functionality. Additionally, it interacts quite a bit with several Unitex files. We highly recommend you become familiar with the format of those files: ‘concord.txt’, ‘concord.ind’, ‘tokens.txt’, ‘text.cod’.
+                      </p>
+
+                      <p>
+                    In `ConceptParser.py`, TagAPI finally makes the Unitex function calls that pull out medical terms from user-provided text. TagAPI does this through the application of developer-created Unitex graphs to the text. Unitex graphs are essentially epsilon nondeterministic finite automata. They search out specific patterns and words in text, and construct a concordance.
+                      </p>
+
+                      <p>
+                    A concordance is just a file that stores each location in the user-provided text that matches the pattern specified in a graph. This is how TagAPI grabs words out of user-provided text.
+                      </p>
+
+                      <p>
+                    Every time an instance of ConceptParser is created, it is given three main pieces of information: user-provided text, a path to a Unitex graph file, and the name of a ConceptParser parsing method.
+                      </p>
+
+                      <p>
+                    ConceptParser applies the graph to the user-provided text to get a concordance of medical terms. It then gives this concordance to the specified ConceptParser parsing method. This parsing method then maps each found term to the correct UMLS CUI, formats all the terms into a python dictionary, and returns the dictionary of neatly formatted medical concepts.
+                    Code highlights
+                      </p>
+
+
+                    ConceptParser.parse
+                      <p>
+                    Called from the `get_concepts_for_grammars` function in `ehrp_utils.py`.<br>
+                    ConceptParser.batch_type specifies whether `medium_processing` or `batch_processing` was called in `ehrp_utils.py`<br>
+                    If `medium_processing`, ConceptParser.parse simply calls the specified ConceptParser parsing method as described above in the Main Idea section.<br>
+                    If ‘batch_processing’, ConceptParser.parse must first preprocess the produced concordance before passing it to the specified ConceptParser parsing method. This is because `batch_processing` has called ConceptParser.parse on all the combined user-provided text together. After applying the Unitex graph to this combined text, ConceptParser must separate each individual user-provided text’s found medical concepts. This allows ConceptParser to group the found medical concepts according to the user-provided text each medical concept was extracted from.
+                      </p>
+                    ConceptParser.masterParser
+                      <p>
+                    ConceptParser.masterParser is responsible for handling the case when the user does not specify any particular set of graphs. When this occurs, all types of medical concepts are searched for, and so we apply the `master.fst2` Unitex graph to the user-provided text. `master.fst2` combines all four of our graphs into one. It makes use of `device.fst2`, `drug.fst2`, `disorder.fst2`, and `procedure.fst2`. This means we will need to be able to parse each of the these four types of findings all within ConceptParser.masterParser. To do this, we first separate the given instances of found medical concepts by category (device, drug, disorder, procedure). Then each ConceptParser parsing method is called on the appropriate category. ConceptParser.masterParser combines these four individual dictionaries into a list, and returns this list to ConcepParser.parse.
+                      </p>
+                </div>
+                <!-- ConceptParser.py End -->
+
+                <!-- DictionaryParser.py Start -->
                 <div class="container" id="dictionaryParser">
                     <!-- Title of Page -->
                     <h2> DictionaryParser.py </h2>
