@@ -4,9 +4,9 @@
 
 ### How to use
 
-'''
+```
 $ cleanData.py [inputCsv] [outputTxtFile]
-'''
+```
 
 ### Uses
 
