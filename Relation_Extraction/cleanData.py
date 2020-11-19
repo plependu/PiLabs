@@ -1,4 +1,3 @@
-import pandas as pd
 import sys
 import csv
 import re
@@ -11,10 +10,12 @@ import re
 #       Extra brackets
 #       Extra double and single quotes
 #   Replaces:
-#       Multiple spaces with a single
-# Input:
-#   Corpus: String that holds the text that you need cleaned
-# Output:
+#       Multiple spaces with a single space
+#
+# Takes:
+#   Corpus:  String that holds the text that you need cleaned
+#
+# Returns:
 #   result8: String that has the "Removes" section removed 
 #            and "Replaces" section replaced
 def clean(corpus):
@@ -30,17 +31,20 @@ def clean(corpus):
 # Does:
 #   Takes a csv file and removes any unnecessary characters, 
 #   then writes it to a new file
-# Input:
+#
+# Takes:
 #   csvFile:    The name of the csv file of two columns. One column 
 #               for the name and the second for description
 #
 #   outputFile: The name of the txt file that you want the cleaned 
 #               text to be outputted
-# Output:
+# Returns:
 #   None
 def cleanData(csvFile, outputFile):
+    csv.field_size_limit(sys.maxsize)
+    # Boolean used for skipping the first line of the csv
     firstLine = True
-    output = open(outputFile, 'w')
+    output = open(outputFile, 'a')
     with open(csvFile) as csvOpened:
         readCsv = csv.reader(csvOpened)
         for row in readCsv:
@@ -48,8 +52,10 @@ def cleanData(csvFile, outputFile):
             if firstLine:
                 firstLine = False
                 continue
-            print(i)
+            # Cleaning the content
             content = clean(row[1] + "\n")
+            # Adding the name of the drug to the beginning of the paragraph
+            content = row[0] + ", " + content
             output.write(str(content))
         output.close()
 
