@@ -1,7 +1,6 @@
 const express = require("express");
 const {UMLSJS} = require("umlsjs");
 const app = express();
-const fs = require('fs');
 const cors = require("cors");
 const run = require("./search.js");
 require('dotenv').config();
