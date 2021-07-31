@@ -101,7 +101,7 @@ app.get("/api/definitions", (req, res)=> {
         var val = tmpDef[0].value;
         console.log("Def", val);
         res.json({def: val});
-    }, 1000 );
+    }, 2000 );
 });
 
 app.get("/api/AUIs", (req, res)=> {
@@ -111,7 +111,7 @@ app.get("/api/AUIs", (req, res)=> {
     // }, 4000 );
     setTimeout(async function () { //text file delay call
         var tmpAUI = await AUIGrabber();
-        var val = tmpAUI[0].ui;
+        var val = tmpAUI[0].ui; 
         console.log("AUI", val);
         res.json({AUI: val});
     }, 1000 );
