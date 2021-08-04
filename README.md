@@ -10,6 +10,7 @@
 > Follow these commands in the Visual Studios Code terminal in order to clone the repository:
 - git clone https://github.com/tyborgg/PiLabs-UMLS.git
 - cd .\PiLabs-UMLS\
+  - Make sure to open the PiLabs-UMLS folder in Visual Studios Code
 - git pull
   - Make sure you are up-to-date
 
@@ -24,10 +25,16 @@
 - npm i nodemon
 - npm i umlsjs
 
+> Next:
+- cd .\client\
+
 > Install these libraries for React.js:
 - npm i axios
 - npm i bootstrap
 - npm i react-bootstrap
 
-> Now you can run the program:
-- npm run dev
+> Next:
+- cd ..
+
+## Now you can run the program:
+> npm run dev
