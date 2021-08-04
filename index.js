@@ -8,10 +8,10 @@ app.use(cors());
 app.use(express.json());
 
 var input = [];
-var CUI = [];
+var num = 0;
+const api_key = process.env.APIKEY;
 
-async function STGrabber(){
-    const api_key = process.env.APIKEY;
+async function STGrabber(){ 
     const token = new UMLSJS.UMLSToken(api_key);
     let ST = await token.getSt();
 
@@ -28,31 +28,37 @@ async function CUIGrabber(val){
     return result;
 }
 
-async function DefGrabber(){
+async function DefGrabber(val){
     var ST = await STGrabber();
     const search = new UMLSJS.CUISearch(ST);
-    search.init(CUI[0]);
-    await search.getDefinitions()
-    const result = search.definitions;
+    search.init(val);
+    var result;
+    try{
+        await search.getDefinitions();
+        result = search.definitions;
+    }
+    catch(error){
+        console.log("ERROR");
+        result = "ERROR";
+    }
 
     return result;
 }
 
-async function AUIGrabber(){
+async function AUIGrabber(val){
     var ST = await STGrabber();
     const search = new UMLSJS.CUISearch(ST);
-    search.init(CUI[0]);
-    await search.getAtoms()
+    search.init(val);
+    await search.getAtoms();
     const result = search.atoms;
 
     return result;
 }
 
-app.post('/search', async(req,res)=>{
-    var searchVal = req.body.searchVal;
-    input = [];
-    input.push(searchVal);
-    console.log(searchVal);
+app.post('/search', cors(), async (req,res)=>{  
+    input[0] = req.body.searchVal;
+    console.log("input", input);
+    res.sendStatus(200);
     // var searchVal = req.body.searchVal;
     // fs.writeFile('userSearch.txt', searchVal, (err) => {
     //     if (err) throw err;
@@ -74,53 +80,117 @@ app.get("/", (req, res)=> {
     res.send(input);              
 });
 
-app.get("/api/CUIs", (req, res)=> {
+app.get("/api/CUIs", async (req, res) =>  {
     // setTimeout(async function () { //text file delay call
     //     val = fs.readFileSync('CUI.txt', 'utf8');
     //     res.json({CUI: val});
     // }, 4000 );
+    var tmpCUI = await CUIGrabber(input[0]);
+    num = 0;
+    var dis = tmpCUI;//[0].ui;
+    var val = "";
+    console.log("val", val);
+    //console.log("CUI", dis);
 
-    setTimeout(async function () { //text file delay call
-        var tmpCUI = await CUIGrabber(input[0]);
-        var val = tmpCUI[0].ui;
-        CUI = [];
-        CUI.push(val);
-        console.log("CUI", val);
-        res.json({CUI: val});
-    }, 200 );
+    while(dis[num] != null){
+        // val.push(dis[num].ui) + " ";
+        // val.push(dis[num].rootSource) + " ";
+        // val.push(dis[num].name) + " ";
+        if(dis[0].ui == "NONE"){
+            val = "NO SEARCH RESULTS";
+            break;
+        }
+        val += (dis[num].ui) + " ";
+        val += (dis[num].rootSource) + " ";
+        val += (dis[num].name) + " ";
+        num++;
+    }
+
+    res.json({CUI: val});  
 });
 
-app.get("/api/definitions", (req, res)=> {
+app.get("/api/sourcess", async (req, res) =>  {
+    // setTimeout(async function () { //text file delay call
+    //     val = fs.readFileSync('CUI.txt', 'utf8');
+    //     res.json({CUI: val});
+    // }, 4000 );
+    var tmpCUI = await CUIGrabber(input[0]);
+    num = 0;
+    var dis = tmpCUI;//[0].ui;
+    var val = "";
+    console.log("val", val);
+    //console.log("CUI", dis);
+
+    while(dis[num] != null){
+        // val.push(dis[num].ui) + " ";
+        // val.push(dis[num].rootSource) + " ";
+        // val.push(dis[num].name) + " ";
+        if(dis[0].ui == "NONE"){
+            val = "NO SEARCH RESULTS";
+            break;
+        }
+        val += (dis[num].rootSource) + " ";
+        num++;
+    }
+
+    res.json({CUI: val});  
+});
+
+app.get("/api/names", async (req, res) =>  {
+    // setTimeout(async function () { //text file delay call
+    //     val = fs.readFileSync('CUI.txt', 'utf8');
+    //     res.json({CUI: val});
+    // }, 4000 );
+    var tmpCUI = await CUIGrabber(input[0]);
+    num = 0;
+    var dis = tmpCUI;//[0].ui;
+    var val = "";
+    console.log("val", val);
+    //console.log("CUI", dis);
+
+    while(dis[num] != null){
+        // val.push(dis[num].ui) + " ";
+        // val.push(dis[num].rootSource) + " ";
+        // val.push(dis[num].name) + " ";
+        if(dis[0].ui == "NONE"){
+            val = "NO SEARCH RESULTS";
+            break;
+        }
+        val += (dis[num].name) + " ";
+        num++;
+    }
+
+    res.json({CUI: val});  
+});
+
+app.get("/api/definitions", async (req, res)=> {
     // setTimeout(async function () { //text file delay call
     //     val = fs.readFileSync('definition.txt', 'utf8');
     //     res.json({def: val});
     // }, 4000 );
-    setTimeout(async function () { //text file delay call
-        var tmpDef = await DefGrabber();
-        var val = tmpDef[0].value;
-        console.log("Def", val);
-        res.json({def: val});
-    }, 2000 );
+    var tmpCUI = await CUIGrabber(input[0]);
+    var val = tmpCUI[0].ui;
+    var tmpDef = await DefGrabber(val);
+    if(tmpDef == "ERROR"){
+        val = tmpDef;
+    }
+    else{
+        val = tmpDef[0].value;
+    }
+    res.json({def: val});
 });
 
-app.get("/api/AUIs", (req, res)=> {
+app.get("/api/AUIs", async (req, res)=> {
     // setTimeout(async function () { //text file delay call
     //     val = fs.readFileSync('AUI.txt', 'utf8');
     //     res.json({AUI: val});
     // }, 4000 );
-    setTimeout(async function () { //text file delay call
-        var tmpAUI = await AUIGrabber();
-        var val = tmpAUI[0].ui; 
-        console.log("AUI", val);
-        res.json({AUI: val});
-    }, 1000 );
+    var tmpCUI = await CUIGrabber(input[0]);
+    var val = tmpCUI[0].ui;
+    var tmpAUI = await AUIGrabber(val);
+    val = tmpAUI[0].ui; 
+    console.log("AUI", val);
+    res.json({AUI: val});
 });
-
-// app.get("/def", (req, res)=> {
-//     res.send(fs.readFileSync('definition.txt', 'utf8'))
-// });
-
-
-// app.use('/definitions', definitions);
 
 app.listen(5000);

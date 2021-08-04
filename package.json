@@ -21,6 +21,6 @@
     "client": "cd client && npm start",
     "dev": "concurrently \"npm run start\" \"npm run client\""
   },
-  "author": "",
+  "author": "Tyler Pastor",
   "license": "ISC"
 }
