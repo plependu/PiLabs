@@ -1,14 +1,10 @@
-h1{
-    color:red;
-}
-
 .searchBar {
-    width: 75%;
+    width: 80%;
     box-sizing: border-box;
-    border-radius: 8px;
-    border: 2px solid white;
+    border-radius: 40px 0px 0px 40px;
+    border: 2px solid rgb(37, 36, 36);
     font-size: 20px;
-    background-color: rgb(80, 73, 73);
+    background-color: rgb(37, 36, 36);
     background-image: url('https://img.icons8.com/ios-filled/2x/ffffff/search.png');
     background-size: 25px; 
     background-position: 12px; 
@@ -19,6 +15,7 @@ h1{
 
 .searchBar:focus {
   background-color: rgb(4, 40, 87);
+  border: 2px solid rgb(4, 40, 87);
 }
 
 .searchBar, select, textarea {
@@ -30,10 +27,10 @@ h1{
 }
 
 .searchButton {
-    border-radius: 8px;
-    background-color: rgb(80, 73, 73); 
+    border-radius: 0px 40px 40px 0px;
+    background-color: rgb(37, 36, 36); 
     color: white;
-    border: 2px solid white; 
+    border: 2px solid rgb(37, 36, 36); 
     padding: 12px 20px;
     font-size: 20px;
     transition-duration: 0.4s;
@@ -41,8 +38,80 @@ h1{
   
 .searchButton:hover {
     background-color: rgb(4, 40, 87);
+    border: 2px solid rgb(4, 40, 87); 
 }
 
-div{
-    color: white;
+.CUI-background{
+    background: rgb(37, 36, 36);
+    padding-left: 11%;
+    padding-top: 40px;
+    padding-bottom: 25px;
 }
+
+.CUI-content{
+    color: white;
+    background-color: rgb(4, 40, 87);
+    border: 3px solid;
+    border-color:black;
+    width: 1200px;
+    height: 200px;
+    overflow: auto;
+    text-align: center;
+    padding-right: 20px;
+}
+
+.logo{
+    float: left;
+    max-width:11%;
+    height:auto;
+    padding: 20px;
+    left: 15px;
+    position: relative;
+}
+
+.logo-nav{
+    background-color: black;
+}
+
+.nav{
+    position: relative;
+    left: 10px;
+    padding-right: 60px;
+    padding-left: 30px;
+    padding-top: 60px;
+    padding-bottom: 55px;
+}
+
+.UMLS{
+    overflow-x:hidden;
+}
+
+.spinner{
+    padding:30px;
+}
+
+.CUI-id{
+    color:white;
+    float:left;
+    padding-left: 300px;
+}
+
+.source-id{
+    color: white;
+    float: left;
+    padding-left: 370px;
+}
+
+.term-id{
+    color:white;
+    float:right;
+    padding-right: 300px;
+}
+
+.id-words{
+    background: rgb(37, 36, 36);
+    padding-top: 12px;
+    padding-bottom: 20px;
+    font-size: 30px;
+}
+

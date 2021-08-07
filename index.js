@@ -8,6 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 var input = [];
+var input2 =[];
 var num = 0;
 const api_key = process.env.APIKEY;
 
@@ -76,6 +77,12 @@ app.post('/search', cors(), async (req,res)=>{
     //res.send(searchVal);
 }); 
 
+app.post('/CUIsearch', cors(), async (req,res)=>{  
+    input2[0] = req.body.CUI;
+    console.log("input", input2);
+    res.sendStatus(200);
+}); 
+
 app.get("/", (req, res)=> {          
     res.send(input);              
 });
@@ -109,7 +116,7 @@ app.get("/api/CUIs", async (req, res) =>  {
     res.json({CUI: val});  
 });
 
-app.get("/api/sourcess", async (req, res) =>  {
+app.get("/api/sources", async (req, res) =>  {
     // setTimeout(async function () { //text file delay call
     //     val = fs.readFileSync('CUI.txt', 'utf8');
     //     res.json({CUI: val});
@@ -168,9 +175,10 @@ app.get("/api/definitions", async (req, res)=> {
     //     val = fs.readFileSync('definition.txt', 'utf8');
     //     res.json({def: val});
     // }, 4000 );
-    var tmpCUI = await CUIGrabber(input[0]);
-    var val = tmpCUI[0].ui;
-    var tmpDef = await DefGrabber(val);
+    // var tmpCUI = await CUIGrabber(input[0]);
+    // var val = tmpCUI[0].ui;
+    var tmpDef = await DefGrabber(input2[0]);
+    console.log("def", tmpDef);
     if(tmpDef == "ERROR"){
         val = tmpDef;
     }
@@ -185,9 +193,9 @@ app.get("/api/AUIs", async (req, res)=> {
     //     val = fs.readFileSync('AUI.txt', 'utf8');
     //     res.json({AUI: val});
     // }, 4000 );
-    var tmpCUI = await CUIGrabber(input[0]);
-    var val = tmpCUI[0].ui;
-    var tmpAUI = await AUIGrabber(val);
+    // var tmpCUI = await CUIGrabber(input[0]);
+    // var val = tmpCUI[0].ui;
+    var tmpAUI = await AUIGrabber(input2[0]);
     val = tmpAUI[0].ui; 
     console.log("AUI", val);
     res.json({AUI: val});
