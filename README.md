@@ -24,6 +24,7 @@
 - npm i node-fetch
 - npm i nodemon
 - npm i umlsjs
+- npm i mysql
 
 > Next:
 - cd .\client\
