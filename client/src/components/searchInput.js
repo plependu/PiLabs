@@ -46,6 +46,8 @@ function App() {
         setAUIs("");
 
         fetch('/api/definitions')
+
+        fetch('/api/definitions')
         .then(res => res.json())
         .then(data => setDefs(data.def))
 

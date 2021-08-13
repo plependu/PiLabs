@@ -61,23 +61,23 @@
 }
 
 .logo{
-    float: left;
-    max-width:11%;
-    height:auto;
-    padding: 20px;
-    left: 15px;
+    float:left;
     position: relative;
+    left: 17px;
+    top: 15px;
+    max-width: 9%;
+    height:auto;
 }
 
 .logo-nav{
-    background-color: black;
+   background: black;
 }
 
 .nav{
+    float: center;
     position: relative;
-    left: 10px;
-    padding-right: 60px;
-    padding-left: 30px;
+    padding-left: 17px;
+    left: 17px;
     padding-top: 60px;
     padding-bottom: 55px;
 }
@@ -113,5 +113,63 @@
     padding-top: 12px;
     padding-bottom: 20px;
     font-size: 30px;
+}
+
+.searchBar-2 {
+    width: 80%;
+    box-sizing: border-box;
+    border-radius: 40px 0px 0px 40px;
+    border: 2px solid rgb(37, 36, 36);
+    font-size: 20px;
+    background-color: rgb(37, 36, 36);
+    background-image: url('https://img.icons8.com/ios-filled/2x/ffffff/search.png');
+    background-size: 25px; 
+    background-position: 12px; 
+    background-repeat: no-repeat;
+    outline: none;
+    padding: 12px 20px 12px 50px;
+}
+
+.searchBar-2:focus {
+  background-color: rgb(4, 40, 87);
+  border: 2px solid rgb(4, 40, 87);
+}
+
+.searchBar-2, select, textarea {
+    color: white;
+}
+
+.searchBar-2, ::placeholder {
+    color: white;
+}
+
+.searchButton-2 {
+    border-radius: 0px 40px 40px 0px;
+    background-color: rgb(37, 36, 36); 
+    color: white;
+    border: 2px solid rgb(37, 36, 36); 
+    padding: 12px 20px;
+    font-size: 20px;
+    transition-duration: 0.4s;
+  }
+  
+.searchButton-2:hover {
+    background-color: rgb(4, 40, 87);
+    border: 2px solid rgb(4, 40, 87); 
+}
+
+.nav-2{
+    background-color: black;
+    float: center;
+    position: relative;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.content-background{
+    background: rgb(37, 36, 36);
+    padding-left: 11%;
+    padding-top: 40px;
+    padding-bottom: 25px;
 }
 
