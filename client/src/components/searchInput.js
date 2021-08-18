@@ -17,22 +17,18 @@ function App() {
         setLoading(false);
         axios.post("http://localhost:5000/search", {    
             searchVal: searchTerm
-        })//.then((response) => {
-        //     console.log(response);
-        // });
+        })
         setCUIs("");
-        setDefs("");
-        setAUIs("");
 
-        fetch('/api/CUIs')
-
-        fetch('/api/CUIs')
-        .then(res => res.json())
-        .then(data => setCUIs(data.CUI))
+        setTimeout(() => {
+            fetch('/CUIs')
+            .then(res => res.json())
+            .then(data => setCUIs(data.CUI))
+        }, 200);
 
         setTimeout(() => {
             setLoading(true);
-        }, 3000);
+        }, 0);
     };
 
     const search2 = () =>{
@@ -45,15 +41,15 @@ function App() {
         setDefs("");
         setAUIs("");
 
-        fetch('/api/definitions')
+        fetch('/definitions')
 
-        fetch('/api/definitions')
+        fetch('/definitions')
         .then(res => res.json())
         .then(data => setDefs(data.def))
 
-        fetch('/api/AUIs')
+        fetch('/AUIs')
 
-        fetch('/api/AUIs')
+        fetch('/AUIs')
         .then(res => res.json())
         .then(data => setAUIs(data.AUI))
 
@@ -98,7 +94,6 @@ function App() {
                 <div className="spinner">
                     <ReactBootStrap.Spinner animation="border" variant="primary" />
                 </div>}
-                {/* {loading ? <div className="info">CUI: {CUIs} <div> AUI: {AUIs} <div> Definition: {defs}</div></div></div> : <main><ReactBootStrap.Spinner animation="border" variant="primary" /></main>} */}
             </div> 
         </div>
         <div className="nav-2">
@@ -119,7 +114,6 @@ function App() {
                 <div className="spinner">
                     <ReactBootStrap.Spinner animation="border" variant="primary" />
                 </div>}
-                {/* {loading ? <div className="info">CUI: {CUIs} <div> AUI: {AUIs} <div> Definition: {defs}</div></div></div> : <main><ReactBootStrap.Spinner animation="border" variant="primary" /></main>} */}
             </div> 
         </div>
     </div>
