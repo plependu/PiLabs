@@ -41,9 +41,9 @@ app.get("/CUIs", async (req, res) => {
         res.json({CUI: "ERROR"});
     }
     else{
-        var sql = 'SELECT CUI ' +
+        var sql = 'SELECT DISTINCT CUI, STR, SAB ' +
                 'FROM mrconso ' +
-                'WHERE STR = \'' + term_input[0] + '\'' +
+                'WHERE STR LIKE \'' + term_input[0] + '\' ' +
                 'ORDER BY CUI';
 
         db.query(sql, (err, result) => {
@@ -57,8 +57,12 @@ app.get("/CUIs", async (req, res) => {
 
                 while(result[index] != null){
                     val += result[index].CUI + " ";
+                    val += result[index].STR + " ";
+                    val += result[index].SAB + ", "
                     index++;
                 }
+
+                val = val.substring(0, val.length - 2);
 
                 console.log(result[0].CUI);
                 console.log('No Error');

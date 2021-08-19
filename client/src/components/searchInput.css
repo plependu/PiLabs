@@ -1,54 +1,86 @@
-.searchBar {
+.logo-nav{
+    display: flex;
+    align-items: center;
+    background: black;
+}
+
+.logo{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    max-width: 8%;
+    height:auto;
+}
+
+.search-bar {
     width: 80%;
-    box-sizing: border-box;
-    border-radius: 40px 0px 0px 40px;
-    border: 2px solid rgb(37, 36, 36);
+    border-radius: 20px 0px 0px 20px;
+    border: 2px solid blue;
     font-size: 20px;
-    background-color: rgb(37, 36, 36);
+    background: none;
     background-image: url('https://img.icons8.com/ios-filled/2x/ffffff/search.png');
     background-size: 25px; 
-    background-position: 12px; 
+    background-position: 25px; 
     background-repeat: no-repeat;
     outline: none;
-    padding: 12px 20px 12px 50px;
+    padding: 12px 0px 13px 70px;
+    transition-duration: 0.4s;
 }
 
-.searchBar:focus {
-  background-color: rgb(4, 40, 87);
-  border: 2px solid rgb(4, 40, 87);
+.search-bar:focus {
+  border: 2px solid white;
 }
 
-.searchBar, select, textarea {
+.search-bar, select, textarea {
     color: white;
 }
 
-.searchBar, ::placeholder {
-    color: white;
+.search-bar, ::placeholder {
+    color: lightgray;
 }
 
-.searchButton {
-    border-radius: 0px 40px 40px 0px;
-    background-color: rgb(37, 36, 36); 
+.search-bar:hover{
+    border: 2px solid white;
+}
+
+.search-button {
+    border-radius: 0px 20px 20px 0px;
+    border: 2px solid blue;
+    background:none;
     color: white;
-    border: 2px solid rgb(37, 36, 36); 
-    padding: 12px 20px;
+    padding: 12px 20px 13px;
     font-size: 20px;
     transition-duration: 0.4s;
   }
   
-.searchButton:hover {
-    background-color: rgb(4, 40, 87);
-    border: 2px solid rgb(4, 40, 87); 
+.search-button:hover {
+    border: 2px solid white; 
+}
+
+.id-words{
+    display: flex;
+    justify-content: center;
+    background: rgb(37, 36, 36);
+    font-size: 30px;
+}
+
+.id{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 150px;
+    margin-left: 150px;
+    color:white;
 }
 
 .CUI-background{
+    display: flex;
+    justify-content: center;
     background: rgb(37, 36, 36);
-    padding-left: 11%;
-    padding-top: 40px;
-    padding-bottom: 25px;
 }
 
 .CUI-content{
+    margin: 10px;
     color: white;
     background-color: rgb(4, 40, 87);
     border: 3px solid;
@@ -59,117 +91,29 @@
     text-align: center;
     padding-right: 20px;
 }
-
-.logo{
-    float:left;
-    position: relative;
-    left: 17px;
-    top: 15px;
-    max-width: 9%;
-    height:auto;
-}
-
-.logo-nav{
-   background: black;
-}
-
-.nav{
-    float: center;
-    position: relative;
-    padding-left: 17px;
-    left: 17px;
-    padding-top: 60px;
-    padding-bottom: 55px;
-}
-
-.UMLS{
-    overflow-x:hidden;
-}
-
 .spinner{
     padding:30px;
 }
 
-.CUI-id{
-    color:white;
-    float:left;
-    padding-left: 300px;
-}
-
-.source-id{
-    color: white;
-    float: left;
-    padding-left: 370px;
-}
-
-.term-id{
-    color:white;
-    float:right;
-    padding-right: 300px;
-}
-
-.id-words{
-    background: rgb(37, 36, 36);
-    padding-top: 12px;
-    padding-bottom: 20px;
-    font-size: 30px;
-}
-
-.searchBar-2 {
-    width: 80%;
-    box-sizing: border-box;
-    border-radius: 40px 0px 0px 40px;
-    border: 2px solid rgb(37, 36, 36);
-    font-size: 20px;
-    background-color: rgb(37, 36, 36);
-    background-image: url('https://img.icons8.com/ios-filled/2x/ffffff/search.png');
-    background-size: 25px; 
-    background-position: 12px; 
-    background-repeat: no-repeat;
-    outline: none;
-    padding: 12px 20px 12px 50px;
-}
-
-.searchBar-2:focus {
-  background-color: rgb(4, 40, 87);
-  border: 2px solid rgb(4, 40, 87);
-}
-
-.searchBar-2, select, textarea {
-    color: white;
-}
-
-.searchBar-2, ::placeholder {
-    color: white;
-}
-
-.searchButton-2 {
-    border-radius: 0px 40px 40px 0px;
-    background-color: rgb(37, 36, 36); 
-    color: white;
-    border: 2px solid rgb(37, 36, 36); 
-    padding: 12px 20px;
-    font-size: 20px;
-    transition-duration: 0.4s;
-  }
-  
-.searchButton-2:hover {
-    background-color: rgb(4, 40, 87);
-    border: 2px solid rgb(4, 40, 87); 
-}
-
 .nav-2{
+    display: flex;
+    justify-content: center;
     background-color: black;
-    float: center;
-    position: relative;
-    padding-top: 50px;
-    padding-bottom: 50px;
+}
+
+.search-bar-2{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.search-button-2{
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .content-background{
+    display: flex;
+    justify-content: center;
     background: rgb(37, 36, 36);
-    padding-left: 11%;
-    padding-top: 40px;
-    padding-bottom: 25px;
 }
 

@@ -58,62 +58,37 @@ function App() {
         }, 3000);
     };
 
+
   return (
     <div className="UMLS">
         <div className="logo-nav">
-            <img
-            className="logo" 
-            src={logo} 
-            alt="HI"></img>
-            <div className="nav">
-                <input 
-                className="searchBar" 
-                type="text" 
-                placeholder="Search the UMLS..." 
-                onChange={(e) => setSearchTerm(e.target.value)}/>
-                <button className="searchButton" 
-                onClick={search}> Search </button>
-            </div>
+            <img className="logo" src={logo} alt="HI"></img>
+            <input className="search-bar" type="text" id="word-search" placeholder="Search the UMLS..." onChange={(e) => setSearchTerm(e.target.value)}/>
+            <button className="search-button" onClick={search}> Search </button>
         </div>
         <div className="id-words">
-            <div className="CUI-id">
-                CUI
-            </div>
-            <div className="source-id">
-                Source
-            </div>
-            <div className="term-id">
-                Term
-            </div>
+            <div className="id CUI-id"> CUI </div>
+            <div className="id source-id"> Source </div>
+            <div className="id term-id"> Term </div>
         </div>
         <div className="CUI-background">
             <div className="CUI-content">
                 {loading ? 
-                <div>{CUIs}
-                </div> : 
-                <div className="spinner">
-                    <ReactBootStrap.Spinner animation="border" variant="primary" />
-                </div>}
+                <div>{CUIs}</div> : 
+                <div className="spinner"> <ReactBootStrap.Spinner animation="border" variant="primary" /></div>}
             </div> 
         </div>
         <div className="nav-2">
-            <input 
-            className="searchBar-2" 
-            type="text" 
-            placeholder="Search with a CUI for more information..." 
-            onChange={(b) => setCUIsearch(b.target.value)}/>
-            <button className="searchButton-2" 
-            onClick={search2}> Search </button>
+            <input className="search-bar-2 search-bar" type="text" placeholder="Search with a CUI for more information..." onChange={(b) => setCUIsearch(b.target.value)}/>
+            <button className="search-button-2 search-button" onClick={search2}> Search </button>
         </div>
         <div className="content-background">
             <div className="CUI-content">
-                {loading2 ? 
-                <div>{defs} <div> {AUIs}
-                </div>
-                </div>  : 
-                <div className="spinner">
-                    <ReactBootStrap.Spinner animation="border" variant="primary" />
-                </div>}
+                {loading2 ? (
+                    <div> {defs} </div>
+                    // <div> {AUIs} </div>
+                ) : 
+                <div className="spinner"> <ReactBootStrap.Spinner animation="border" variant="primary" /> </div>}
             </div> 
         </div>
     </div>
