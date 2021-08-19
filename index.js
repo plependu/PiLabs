@@ -42,9 +42,9 @@ app.get("/CUIs", async (req, res) => {
     }
     else{
         var sql = 'SELECT DISTINCT CUI, STR, SAB ' +
-                'FROM mrconso ' +
-                'WHERE STR LIKE \'' + term_input[0] + '\' ' +
-                'ORDER BY CUI';
+                  'FROM mrconso ' +
+                  'WHERE STR LIKE \'' + term_input[0] + '\' ' +
+                  'ORDER BY CUI';
 
         db.query(sql, (err, result) => {
             if(err){

@@ -15,7 +15,7 @@
 
 .search-bar {
     width: 80%;
-    border-radius: 20px 0px 0px 20px;
+    border-radius: 40px 0px 0px 40px;
     border: 2px solid blue;
     font-size: 20px;
     background: none;
@@ -44,8 +44,30 @@
     border: 2px solid white;
 }
 
+.search-label{
+    position: absolute;
+    left: 233px;
+    top: 50px;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: normal;
+    color: white;
+    cursor: text;
+    background-color: black;
+    border: 5px solid black;
+    transition: top 200ms ease-in,
+                left 200ms ease-in,
+                font-size 200ms ease-in;
+}
+
+.search-bar-1:focus ~ .search-label, .search-bar-1:not(:placeholder-shown).search-bar-1:not(:focus) ~ .search-label{
+    top: 24px;
+    font-size: 15px;
+    left: 220px;
+}
+
 .search-button {
-    border-radius: 0px 20px 20px 0px;
+    border-radius: 0px 40px 40px 0px;
     border: 2px solid blue;
     background:none;
     color: white;
@@ -104,6 +126,28 @@
 .search-bar-2{
     margin-top: 30px;
     margin-bottom: 30px;
+}
+
+.search2-label{
+    position: absolute;
+    left: 170px;
+    top: 458px;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: normal;
+    color: white;
+    cursor: text;
+    background-color: black;
+    border: 5px solid black;
+    transition: top 200ms ease-in,
+                left 200ms ease-in,
+                font-size 200ms ease-in;
+}
+
+.search-bar-2:focus ~ .search2-label, .search-bar-2:not(:placeholder-shown).search-bar-2:not(:focus) ~ .search2-label{
+    top: 430px;
+    font-size: 15px;
+    left: 157px;
 }
 
 .search-button-2{
