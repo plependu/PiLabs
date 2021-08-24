@@ -1,3 +1,5 @@
+//authors Summer 2021 Team - Tyler Pastor, Mayur Ryali, Apar Mistry, Gwen Kiler
+
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -38,13 +40,17 @@ app.post('/CUIsearch', cors(), async (req,res) => {
 
 app.get("/CUIs", async (req, res) => {
     if(term_input[0] == ""){
-        res.json({CUI: "ERROR"});
+        result = [];
+        result[0] = {
+            CUI: "ERROR"
+        }
+        res.json({result});
     }
     else{
-        var sql = 'SELECT DISTINCT CUI, STR, SAB ' +
+        var sql = 'SELECT DISTINCT CUI ' +
                   'FROM mrconso ' +
                   'WHERE STR LIKE \'' + term_input[0] + '\' ' +
-                  'ORDER BY CUI';
+                  'ORDER BY CUI;';
 
         db.query(sql, (err, result) => {
             if(err){
@@ -52,21 +58,8 @@ app.get("/CUIs", async (req, res) => {
                 res.json({CUI: "ERROR"});
             }
             else{
-                index = 0;
-                val = "";
-
-                while(result[index] != null){
-                    val += result[index].CUI + " ";
-                    val += result[index].STR + " ";
-                    val += result[index].SAB + ", "
-                    index++;
-                }
-
-                val = val.substring(0, val.length - 2);
-
-                console.log(result[0].CUI);
                 console.log('No Error');
-                res.json({CUI: val});
+                res.json({result});
             }
         });
     } 
@@ -83,8 +76,42 @@ app.get("/names", async (req, res) => {
 });
 
 app.get("/definitions", async (req, res) => {
-    
-    res.json({def: val});
+    if(CUI_input[0] == ""){
+        res.json({def: "ERROR"});
+    }
+    else{
+        var sql = 'SELECT DISTINCT CUI, DEF ' +
+                'FROM mrdef ' +
+                'WHERE CUI = \'' + CUI_input[0] + '\' ';
+
+        db.query(sql, (err, result) => {
+            if(err){
+                console.log("Def error");
+                res.json({def: "ERROR"});
+            }
+            else{
+                index = 0;
+                val = "";
+
+                while(result[index] != null){
+                    val += result[index].CUI + " ";
+                    val += result[index].DEF + ", ";
+                    console.log({index});
+
+                    index++;
+                }
+
+                val = val.substring(0, val.length - 2);
+
+                if(val == ""){
+                    val = "No Definitions Exist";
+                }
+
+                console.log('No Error');
+                res.json({def: val});
+            }
+        });
+    }
 });
 
 app.get("/AUIs", async (req, res) => {
