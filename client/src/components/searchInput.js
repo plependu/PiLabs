@@ -16,9 +16,31 @@ function App() {
     const param = useParams();
     const history = useHistory();
 
-    const search = async (val) => {
-        history.push(`search=${searchTerm}`);
+    useEffect(() => {
+        paramInput();
+    }, param);
+
+    const paramInput = async () => {
+        document.getElementById('word-search').value = param.term;
+
         setLoading(false);
+
+        await axios.post('http://localhost:5000/search', {    
+            searchVal: param.term
+        })
+
+        const data = await fetch('/CUIs');
+        const CUI = await data.json();
+        setCUIs(CUI.result);
+
+        setLoading(true);
+    }
+
+    const search = async () => {
+        history.push(`search=${searchTerm}`);
+
+        setLoading(false);
+
         await axios.post('http://localhost:5000/search', {    
             searchVal: searchTerm
         })
@@ -29,6 +51,12 @@ function App() {
 
         setLoading(true);
     };
+
+    const keyEvent = (e) => {
+        if(e.key === "Enter"){
+            search();
+        }
+    }
 
     const search2 = () =>{
         setLoading2(false);
@@ -59,9 +87,16 @@ function App() {
         <div className="UMLS">
             <div className="logo-nav">
                 <img className="logo" src={logo} alt="HI"></img>
-                <input className="search-bar-1 search-bar" type="text" id="word-search" placeholder=" " onChange={(e) => setSearchTerm(e.target.value)}/>
+                <input 
+                    className="search-bar-1 search-bar" 
+                    type="text" 
+                    id="word-search"
+                    placeholder="Search the UMLS..." 
+                    onKeyPress={keyEvent} 
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
                 <button className="search-button" onClick={search}> Search </button>
-                <label from="word-search" className="search-label"> Search the UMLS...</label>
+                {/* <label from="word-search" className="search-label"> Search the UMLS...</label> */}
             </div>
             <div className="id-words">
                 <div className="id CUI-id"> CUI </div>
@@ -78,9 +113,9 @@ function App() {
                 </div> 
             </div>
             <div className="nav-2">
-                <input className="search-bar-2 search-bar" id="CUI-search" type="text" placeholder=" " onChange={(b) => setCUIsearch(b.target.value)}/>
+                <input className="search-bar-2 search-bar" id="CUI-search" type="text" placeholder="Search with a CUI for more information..." onChange={(b) => setCUIsearch(b.target.value)}/>
                 <button className="search-button-2 search-button" onClick={search2}> Search </button>
-                <label from="CUI-search" className="search2-label"> Search with a CUI for more information... </label>
+                {/* <label from="CUI-search" className="search2-label"> Search with a CUI for more information... </label> */}
             </div>
             <div className="content-background">
                 <div className="CUI-content">

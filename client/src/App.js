@@ -8,7 +8,7 @@ function App() {
       <div>
         <Switch>
           <Route path='/' exact component={SearchInput}/>
-          <Route path='/search=:CUI' component={SearchInput}/>
+          <Route path='/search=:term' component={SearchInput}/>
         </Switch>
       </div>
     </Router>
