@@ -5,7 +5,7 @@ import * as ReactBootStrap from 'react-bootstrap';
 import logo from './PiLabsCrossLogo.png';
 import { useHistory, useParams } from 'react-router-dom';
 
-function App() {
+function SearchInput() {
     const [searchTerm, setSearchTerm] = useState("");
     const [CUIsearch, setCUIsearch] = useState("");
     const [CUIs, setCUIs] = useState([]);
@@ -18,22 +18,26 @@ function App() {
 
     useEffect(() => {
         paramInput();
-    }, param);
+    }, [param]);
 
     const paramInput = async () => {
-        document.getElementById('word-search').value = param.term;
+        if(param.term == null){
+        }
+        else{
+            document.getElementById('word-search').value = param.term;
 
-        setLoading(false);
+            setLoading(false);
 
-        await axios.post('http://localhost:5000/search', {    
-            searchVal: param.term
-        })
+            await axios.post('http://localhost:5000/search', {    
+                searchVal: param.term
+            })
 
-        const data = await fetch('/CUIs');
-        const CUI = await data.json();
-        setCUIs(CUI.result);
+            const data = await fetch('/CUIs');
+            const CUI = await data.json();
+            setCUIs(CUI.result);
 
-        setLoading(true);
+            setLoading(true);
+        }
     }
 
     const search = async () => {
@@ -130,4 +134,4 @@ function App() {
     );
 }
 
-export default App;
+export default SearchInput;

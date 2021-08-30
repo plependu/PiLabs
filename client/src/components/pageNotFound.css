@@ -1,0 +1,31 @@
+.bg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: black;
+}
+
+.phrase{
+    font-family: monospace;
+    font-size: 10vh;
+    animation: anim 5s cubic-bezier(0.215, 0.610, 0.355, 1) infinite;  
+}
+
+@keyframes anim {
+    0%{
+        color: black;
+    }
+    25%{
+        color: red;
+    }
+    50%{
+        color:black;
+    }
+    75%{
+        color: red;
+    }
+    100%{
+        color: black;
+    }
+}
