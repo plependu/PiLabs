@@ -1,47 +1,50 @@
 .logo-nav{
     display: flex;
     align-items: center;
-    background: black;
+    background: rgb(19, 19, 19);
+    border-bottom: 3px solid #0F58FF;
 }
 
 .logo{
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 20px;
-    margin-right: 20px;
+    margin-right: 60px;
     max-width: 8%;
     height:auto;
 }
 
 .search-bar {
-    width: 80%;
-    border-radius: 40px 0px 0px 40px;
-    border: 2px solid blue;
-    font-size: 20px;
-    background: none;
-    background-image: url('https://img.icons8.com/ios-filled/2x/ffffff/search.png');
+    width: 70%;
+    border-radius: 70px 70px;
+    background-color: rgb(54, 52, 52);
+    border: 3px solid rgb(19, 19, 19);
+    font-size: 22px;
+    /* background-image: url('https://img.icons8.com/ios-filled/2x/ffffff/search.png');
     background-size: 25px; 
     background-position: 25px; 
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
     outline: none;
-    padding: 12px 0px 13px 70px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 30px;
     transition-duration: 0.4s;
 }
 
 .search-bar:focus {
-  border: 2px solid white;
+    border: 3px solid #0F58FF;
 }
 
 .search-bar, select, textarea {
     color: white;
 }
 
-.search-bar, ::placeholder {
-    color: lightgray;
+.search-bar::placeholder {
+    color: rgb(204, 197, 197);
 }
 
 .search-bar:hover{
-    border: 2px solid white;
+    border: 3px solid #0F58FF;
 }
 
 .search-label{
@@ -67,23 +70,32 @@
 }
 
 .search-button {
-    border-radius: 0px 40px 40px 0px;
-    border: 2px solid blue;
-    background:none;
-    color: white;
-    padding: 12px 20px 13px;
-    font-size: 20px;
-    transition-duration: 0.4s;
+    margin-left: 20px;
+    border-radius: 50%;
+    background-color: rgb(54, 52, 52);
+    border: 3px solid rgb(19, 19, 19);
+    max-height: 70px;
+    max-width: 70px;
+    transition-duration: 500ms;
   }
   
 .search-button:hover {
-    border: 2px solid white; 
+    border: 3px solid #0F58FF;
+}
+
+.mg{
+    max-height: 100%;
+    max-width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 
 .id-words{
     display: flex;
     justify-content: center;
-    background: rgb(37, 36, 36);
+    background: rgb(19, 19, 19);
     font-size: 30px;
 }
 
@@ -98,7 +110,8 @@
 .CUI-background{
     display: flex;
     justify-content: center;
-    background: rgb(37, 36, 36);
+    background: rgb(19, 19, 19);
+    border-bottom: 3px solid #0F58FF;;
 }
 
 .CUI-content{
@@ -120,7 +133,8 @@
 .nav-2{
     display: flex;
     justify-content: center;
-    background-color: black;
+    background: rgb(19, 19, 19);
+    border-bottom: 3px solid #0F58FF;
 }
 
 .search-bar-2{
@@ -158,6 +172,6 @@
 .content-background{
     display: flex;
     justify-content: center;
-    background: rgb(37, 36, 36);
+    background: rgb(19, 19, 19);
 }
 

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import * as ReactBootStrap from 'react-bootstrap';
 import logo from './PiLabsCrossLogo.png';
+import mg from './mg.png';
 import { useHistory, useParams } from 'react-router-dom';
 
 function SearchInput() {
@@ -90,7 +91,7 @@ function SearchInput() {
     return (
         <div className="UMLS">
             <div className="logo-nav">
-                <img className="logo" src={logo} alt="HI"></img>
+                <img className="logo" src={logo} alt="logo"></img>
                 <input 
                     className="search-bar-1 search-bar" 
                     type="text" 
@@ -99,7 +100,9 @@ function SearchInput() {
                     onKeyPress={keyEvent} 
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <button className="search-button" onClick={search}> Search </button>
+                <button className="search-button" onClick={search}>
+                    <img className="mg" src={mg} alt="mg"></img> 
+                </button>
                 {/* <label from="word-search" className="search-label"> Search the UMLS...</label> */}
             </div>
             <div className="id-words">
@@ -118,7 +121,9 @@ function SearchInput() {
             </div>
             <div className="nav-2">
                 <input className="search-bar-2 search-bar" id="CUI-search" type="text" placeholder="Search with a CUI for more information..." onChange={(b) => setCUIsearch(b.target.value)}/>
-                <button className="search-button-2 search-button" onClick={search2}> Search </button>
+                <button className="search-button-2 search-button" onClick={search2}>
+                    <img className="mg" src={mg} alt="mg"></img>
+                </button>
                 {/* <label from="CUI-search" className="search2-label"> Search with a CUI for more information... </label> */}
             </div>
             <div className="content-background">
