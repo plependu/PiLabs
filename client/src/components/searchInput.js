@@ -1,10 +1,11 @@
 import './searchInput.css';
+import Info from './info.js';
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import * as ReactBootStrap from 'react-bootstrap';
 import logo from './PiLabsCrossLogo.png';
 import mg from './mg.png';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, Link, useRouteMatch, Switch, Route } from 'react-router-dom';
 
 function SearchInput() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -16,16 +17,18 @@ function SearchInput() {
     const [loading2, setLoading2] = useState(true);
     const param = useParams();
     const history = useHistory();
+    const { path, url } = useRouteMatch();
 
     useEffect(() => {
         paramInput();
     }, [param]);
 
     const paramInput = async () => {
-        if(param.term == null){
+        if(param.term == null || searchTerm != ""){
         }
         else{
             document.getElementById('word-search').value = param.term;
+            setSearchTerm(param.term);
 
             setLoading(false);
 
@@ -39,39 +42,60 @@ function SearchInput() {
 
             setLoading(true);
         }
-    }
+    };
 
     const search = async () => {
-        history.push(`search=${searchTerm}`);
+        if(searchTerm != ""){
+            history.push(`/search=${searchTerm}`);
 
-        setLoading(false);
+            setLoading(false);
 
-        await axios.post('http://localhost:5000/search', {    
-            searchVal: searchTerm
-        })
+            await axios.post('http://localhost:5000/search', {    
+                searchVal: searchTerm
+            })
 
-        const data = await fetch('/CUIs');
-        const CUI = await data.json();
-        setCUIs(CUI.result);
+            const data = await fetch('/CUIs');
+            const CUI = await data.json();
+            setCUIs(CUI.result);
 
-        setLoading(true);
+            setLoading(true);
+        }
     };
 
     const keyEvent = (e) => {
         if(e.key === "Enter"){
             search();
         }
-    }
+    };
+
+    async function searchVal(){
+        await axios.post('http://localhost:5000/search', {    
+            searchVal: param.term
+        })
+
+        const data = await fetch('/CUIs');
+        const CUI = await data.json();
+
+        var check = 'false';
+        var index = 0;
+
+        while(CUI.result[index] != null){
+            if(CUI.result[index] === param.CUI){
+                check = 'true';
+                break;
+            }
+        }
+
+        if(check == 'false'){
+            history.push(`/search=${param.Term}`);
+        }   
+    };
 
     const search2 = () =>{
         setLoading2(false);
         axios.post("http://localhost:5000/CUIsearch", {    
             CUI: CUIsearch
-        })//.then((response) => {
-        //     console.log(response);
-        // });
-        setDefs("");
-        setAUIs("");
+        });
 
         setTimeout(() => {
             fetch('/definitions')
@@ -110,14 +134,17 @@ function SearchInput() {
                 <div className="id source-id"> Source </div>
                 <div className="id term-id"> Term </div>
             </div>
+            <Switch>
+                <Route path={`${path}/:CUI`} component={Info}/>
+            </Switch>
             <div className="CUI-background">
                 <div className="CUI-content">
                     {loading ? 
                     <div>{CUIs.map(CUIs => (
-                        <div key={CUIs.CUI}>{CUIs.CUI}</div>
+                        <div key={CUIs.CUI}><Link to={`${url}/${CUIs.CUI}`}> {CUIs.CUI} </Link></div>
                     ))}</div> : 
                     <div className="spinner"> <ReactBootStrap.Spinner animation="border" variant="primary" /></div>}
-                </div> 
+                </div>
             </div>
             <div className="nav-2">
                 <input className="search-bar-2 search-bar" id="CUI-search" type="text" placeholder="Search with a CUI for more information..." onChange={(b) => setCUIsearch(b.target.value)}/>
@@ -135,7 +162,7 @@ function SearchInput() {
                     <div className="spinner"> <ReactBootStrap.Spinner animation="border" variant="primary" /> </div>}
                 </div> 
             </div>
-        </div>
+    </div>
     );
 }
 

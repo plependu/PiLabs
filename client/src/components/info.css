@@ -1,0 +1,16 @@
+.div{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    background: rgb(19, 19, 19);
+}
+
+.div2{
+    margin-left: 110px;
+    color: white;
+}
+
+.div3{
+    margin-left: 10px;
+    color: #0F58FF;
+}

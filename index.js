@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mysql = require("mysql");
+const { Console } = require("console");
 require('dotenv').config();
 app.use(cors());
 app.use(express.json());
@@ -39,7 +40,7 @@ app.post('/CUIsearch', cors(), async (req,res) => {
 }); 
 
 app.get("/CUIs", async (req, res) => {
-    if(term_input[0] == ""){
+    if(term_input[0] == "error"){
         result = [];
         result[0] = {
             CUI: "ERROR"
@@ -118,5 +119,95 @@ app.get("/AUIs", async (req, res) => {
     
     res.json({AUI: val});
 });
+
+// app.get("/ancestors", async (req, res) => {
+//     var temp = [];
+//     var sql = 'SELECT CUI, PTR, SAB ' +
+//               'FROM mrhier ' + 
+//               'WHERE CUI = \'' + 'tylenol' + '\';';
+//             // 'LIMIT 60000, 100000;';
+
+//     db.query(sql, (err, result) => {
+//         if(err){
+//             console.log(err);
+//         }
+//         else{
+//             res.json({result});
+            // var val = 0;
+            // while(result[val] != null){
+            //     insertAUI(result[val].CUI, result[val].PTR, result[val].SAB);
+            //     val++;
+            //     console.log(val)
+            // }
+    //     }
+    // });
+
+    // const insertAUI = async (CUIinsert, PTRinsert, SABinsert) => {
+    //     var size = PTRinsert.length;
+    //     console.log({size});
+    //     var index = 0;
+    //     var blank = '';
+    //     console.log(PTRinsert);
+    //     AUI = [];
+    //     CUI = [];
+    //     var j = 0;
+    //     var i = 0;
+    //     while(i < size){
+    //         while(PTRinsert[j] != "." && size != j){
+    //             blank += PTRinsert[j]
+    //             j++;
+    //         }
+    //         AUI.unshift(blank);
+    //         blank = '';
+    //         j++;
+    //         i = j;
+    //     }
+
+    //     console.log({AUI});
+
+        // while(AUI[index] != null){
+        //     var sql = "SELECT CUI " +
+        //               "FROM mrconso " +
+        //               "WHERE AUI = \'" + AUI[index] + "\';";
+
+        //     db.query(sql, (err, result) => {
+        //     if(err){
+        //         console.log("error");
+        //     }
+        //     else{
+        //         CUI.push(result[0].CUI);
+        //     }
+        //     });
+
+        //     index++;
+        // }
+
+        // // setTimeout(() => {
+
+        // console.log(await {CUI});
+
+        // var dist = 0;
+        // index = 0;
+
+        // while(AUI[index] != null){
+        //     dist = index + 1;
+        //     var sql = "INSERT INTO ancestors (CUI, CUI2, DIST, SAB) " +
+        //             "VALUES (\'" + CUIinsert + "\', \'" + AUI[index] + "\', " + dist + ", \'" + SABinsert  + "\');";
+
+        //     db.query(sql, (err, result) => {
+        //     if(err){
+        //         console.log({err});
+        //         console.log({result});
+        //     }
+        //     else{
+        //         console.log("success");   
+        //     }
+        //     });
+
+        //     index++;
+        // }
+        // }, 500);
+        // }
+// });
 
 app.listen(5000);
