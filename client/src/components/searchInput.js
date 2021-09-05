@@ -21,12 +21,14 @@ function SearchInput() {
 
     useEffect(() => {
         paramInput();
-    }, [param]);
+    }, [param.term]);
 
     const paramInput = async () => {
-        if(param.term == null || searchTerm != ""){
+        if(param.term == null || searchTerm !== ""){
         }
         else{
+            // history.push(`/search=${param.term}`);
+            // console.log("HEELO");
             document.getElementById('word-search').value = param.term;
             setSearchTerm(param.term);
 
@@ -34,18 +36,17 @@ function SearchInput() {
 
             await axios.post('http://localhost:5000/search', {    
                 searchVal: param.term
-            })
+            });
 
             const data = await fetch('/CUIs');
             const CUI = await data.json();
             setCUIs(CUI.result);
-
             setLoading(true);
         }
     };
 
     const search = async () => {
-        if(searchTerm != ""){
+        if(searchTerm !== ""){
             history.push(`/search=${searchTerm}`);
 
             setLoading(false);
@@ -66,29 +67,6 @@ function SearchInput() {
         if(e.key === "Enter"){
             search();
         }
-    };
-
-    async function searchVal(){
-        await axios.post('http://localhost:5000/search', {    
-            searchVal: param.term
-        })
-
-        const data = await fetch('/CUIs');
-        const CUI = await data.json();
-
-        var check = 'false';
-        var index = 0;
-
-        while(CUI.result[index] != null){
-            if(CUI.result[index] === param.CUI){
-                check = 'true';
-                break;
-            }
-        }
-
-        if(check == 'false'){
-            history.push(`/search=${param.Term}`);
-        }   
     };
 
     const search2 = () =>{

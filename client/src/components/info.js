@@ -3,16 +3,41 @@ import './searchInput'
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { useParams, useHistory } from 'react-router-dom';
+import { checkPrime } from 'crypto';
 
 function Info() {
     var param = useParams();
     // const [term, setTerm] = useState(param.term);
-    // var history = useHistory();
+    var history = useHistory();
 
-    // useEffect(() => {
-    //     history.push(`/404`);
-    //     console.log(term);
-    // }, [term])
+    useEffect(() => {
+        check();
+    }, [param.CUI])
+
+    const check = async () => {
+        await axios.post('http://localhost:5000/search', {    
+            searchVal: param.term
+        });
+
+        const data = await fetch('/CUIs');
+        const CUI = await data.json();
+
+        var index = 0;
+        var change = 'false';
+
+        while(CUI.result[index] != null){
+            if(param.CUI === CUI.result[index].CUI){
+                change = 'true';
+                break;
+            }
+            console.log(index);
+            index++;
+        }
+
+        if(change === 'false'){
+            history.push(`/search=${param.term}`);
+        }
+    };
 
     return (
         <div className="div">
