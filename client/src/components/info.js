@@ -1,9 +1,8 @@
 import './info.css';
 import './searchInput'
-import React, {useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useHistory } from 'react-router-dom';
-import { checkPrime } from 'crypto';
 
 function Info() {
     var param = useParams();

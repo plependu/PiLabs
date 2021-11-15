@@ -3,6 +3,8 @@
     align-items: center;
     background: rgb(19, 19, 19);
     border-bottom: 3px solid #0F58FF;
+    position: sticky;
+    top: 0;
 }
 
 .logo{
@@ -47,7 +49,7 @@
     border: 3px solid #0F58FF;
 }
 
-.search-label{
+/* .search-label{
     position: absolute;
     left: 233px;
     top: 50px;
@@ -67,7 +69,7 @@
     top: 24px;
     font-size: 15px;
     left: 220px;
-}
+} */
 
 .search-button {
     margin-left: 20px;
@@ -111,6 +113,7 @@
     display: flex;
     justify-content: center;
     background: rgb(19, 19, 19);
+    min-height: 1000px;
     border-bottom: 3px solid #0F58FF;
 }
 
@@ -126,52 +129,10 @@
     text-align: center;
     padding-right: 20px;
 }
+
 .spinner{
     padding:30px;
 }
 
-.nav-2{
-    display: flex;
-    justify-content: center;
-    background: rgb(19, 19, 19);
-    border-bottom: 3px solid #0F58FF;
-}
 
-.search-bar-2{
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-.search2-label{
-    position: absolute;
-    left: 170px;
-    top: 458px;
-    font-size: 20px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-style: normal;
-    color: white;
-    cursor: text;
-    background-color: black;
-    border: 5px solid black;
-    transition: top 200ms ease-in,
-                left 200ms ease-in,
-                font-size 200ms ease-in;
-}
-
-.search-bar-2:focus ~ .search2-label, .search-bar-2:not(:placeholder-shown).search-bar-2:not(:focus) ~ .search2-label{
-    top: 430px;
-    font-size: 15px;
-    left: 157px;
-}
-
-.search-button-2{
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-.content-background{
-    display: flex;
-    justify-content: center;
-    background: rgb(19, 19, 19);
-}
 
